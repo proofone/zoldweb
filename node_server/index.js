@@ -8,7 +8,11 @@ const app = express();
 app.engine('.html', require('ejs').__express);
 
 app.set('views', './templates')
-app.use(express.static(path.join(__dirname, 'public')));
+var staticOptions = {setHeaders: function (res, path, stat) {
+    res.set('Access-Control-Allow-Origin', '*')
+  }
+}
+app.use(express.static('public', staticOptions));
 
 app.get("/", (req, res) => {
     res.json({ message: "Hello world!" });
@@ -18,5 +22,5 @@ app.get("/base", (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Zoldweb NodeJS Server listening on ${PORT}`);
+    console.log(`Zoldweb NodeJS Server listening on :${PORT}`);
 });
