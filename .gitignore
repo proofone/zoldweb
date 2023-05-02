@@ -4,6 +4,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+t.t
 
 # C extensions
 *.so
@@ -66,3 +67,14 @@ web_modules/
 
 # Optional npm cache directory
 .npm
+
+# VisualStudioCode
+.vscode/*      # Maybe .vscode/**/* instead - see comments
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# VisualStudioCode Patch
+# Ignore all local history of files
+**/.history

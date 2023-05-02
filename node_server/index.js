@@ -15,7 +15,7 @@ var staticOptions = {setHeaders: function (res, path, stat) {
 app.use(express.static('public', staticOptions));
 
 app.get("/", (req, res) => {
-    res.json({ message: "Hello world!" });
+    res.render("index.html");
 });
 app.get("/base", (req, res) => {
     res.render("base.html")

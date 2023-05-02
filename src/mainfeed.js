@@ -2,17 +2,26 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 
-export function BasicPost() {
+export function BasicPost(props) {
+  let postContent = [];
+  props.title && postContent.push(<Card.Title>{props.title}</Card.Title>);
+  props.text && postContent.push(<Card.Text>{props.text}</Card.Text>);
   return (
-    <Card style={{  }}>
+    <Card className={"newsfeed-post"}>
       <Card.Body>
-        <Card.Title>Hello wrld'</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
+        {postContent}
         <Button variant="outline-primary">Go somewhere</Button>
       </Card.Body>
     </Card>
   );
+}
+
+export function NewsFeed({ posts }) {
+
+  posts.sort((a, b) => b.key-a.key)
+  return (
+    posts.map((postProps) => {
+      return <BasicPost key={postProps.key} {...postProps} />
+    })
+  )
 }
