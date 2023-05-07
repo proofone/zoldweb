@@ -1,9 +1,11 @@
 //import React from "react";
-import { createRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import { NewsFeed } from './mainfeed';
+import { NewsFeedPostForm } from './postforms';
 
-//import ReactDOM from 'react-dom';
-//const bootstrap = require('bootstrap');
+
+const postformroot = createRoot(document.getElementById('post-form'))
+postformroot.render(<NewsFeedPostForm />)
 
 const root = createRoot(document.getElementById('main-feed'))
 
