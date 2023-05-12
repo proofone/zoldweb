@@ -1,7 +1,8 @@
-//import React from "react";
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import { NewsFeed } from './mainfeed';
 import { NewsFeedPostForm } from './postforms';
+import { Dropdown } from 'bootstrap';
+import './scss/styles.scss'
 
 
 const postformroot = createRoot(document.getElementById('post-form'))
