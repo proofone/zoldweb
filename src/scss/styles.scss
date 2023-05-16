@@ -1,3 +1,14 @@
+
+
+$primary: #09865cbb;
+$border-radius: .1rem;
+.newsfeed-post {
+    margin: .5rem;
+    border: none!important;
+    box-shadow: 0.05rem 0.15rem 0.3rem rgba(black, .25)
+
+}
+
+
 @import "~bootstrap/scss/bootstrap"; // Import all of Bootstrap's CSS
 //TODO: individual imports
-

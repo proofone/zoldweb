@@ -10,7 +10,7 @@ export function BasicPost(props) {
     <Card className={"newsfeed-post"}>
       <Card.Body>
         {postContent}
-        <Button variant="outline-primary">Go somewhere</Button>
+        <Button variant="outline-primary my-1">Go somewhere</Button>
       </Card.Body>
     </Card>
   );
