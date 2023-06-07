@@ -2,6 +2,11 @@
 
 $primary: #09865cbb;
 $border-radius: .1rem;
+
+body {
+    padding-bottom: 24px;
+}
+
 .newsfeed-post {
     margin: .5rem;
     border: none!important;
@@ -9,6 +14,14 @@ $border-radius: .1rem;
 
 }
 
+#main-feed {
+    min-height: 70vh;
+}
+
+#main-container div {
+    margin-left: auto;
+    margin-right: auto;
+}
 
 @import "~bootstrap/scss/bootstrap"; // Import all of Bootstrap's CSS
 //TODO: individual imports

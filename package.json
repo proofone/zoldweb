@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node node_server/index.js",
-    "wpdevserve": "webpack serve --open",
+    "wpdevserve": "webpack serve --open --watch-options-poll",
     "build": "webpack"
   },
   "author": "",
@@ -15,6 +15,7 @@
     "bootstrap": "5.2",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "mongoose": "^7.2.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0"

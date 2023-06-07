@@ -1,5 +1,16 @@
 const express = require("express");
-var path = require('path');
+const mongoose = require('mongoose')
+var cors = require('cors');
+
+// Connect MongoDB
+const mongoService = process.env.MONGO_SERVICE || "localhost"
+const mongoPort = process.env.MONGO_PORT || 27017;
+const mongoUrl = `mongodb://${mongoService}:${mongoPort}/mini-message-board`;
+mongoose.connect(mongoUrl, (err) => {
+    if (err) throw err;
+    
+    console.log(`MongoDB running at port ${mongoPort}`);
+})
 
 const PORT = process.env.PORT || 3001;
 

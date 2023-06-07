@@ -19,7 +19,7 @@ export function NewsFeedPostForm() {
     }
 
     return (
-        <Form id='newsfeedpostform' className="m-2" onSubmit={handleSubmit}>
+        <Form id='newsfeedpostform' className="my-2" onSubmit={handleSubmit}>
             <Form.Label visuallyHidden="true">Posztod szövege</Form.Label>
             <Form.Control name="text" id="posttext" as="textarea" placeholder="Posztod szövege">
             </Form.Control>
