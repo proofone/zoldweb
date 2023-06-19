@@ -1,16 +1,15 @@
 const express = require("express");
 const mongoose = require('mongoose')
-var cors = require('cors');
+//var cors = require('cors');
 
 // Connect MongoDB
 const mongoService = process.env.MONGO_SERVICE || "localhost"
 const mongoPort = process.env.MONGO_PORT || 27017;
 const mongoUrl = `mongodb://${mongoService}:${mongoPort}/mini-message-board`;
-mongoose.connect(mongoUrl, (err) => {
-    if (err) throw err;
-    
-    console.log(`MongoDB running at port ${mongoPort}`);
-})
+mongoose.connect(mongoUrl).then(() => {
+    console.log(`MongoDB running at port ${mongoPort}`);    
+}
+).catch(err => console.log(err))
 
 const PORT = process.env.PORT || 3001;
 
@@ -22,7 +21,8 @@ app.set('views', './templates')
 var staticOptions = {setHeaders: function (res, path, stat) {
     res.set('Access-Control-Allow-Origin', '*')
   }
-}
+}  //TODO: import from settings file
+
 app.use(express.static('public', staticOptions));
 
 app.get("/", (req, res) => {
@@ -30,6 +30,11 @@ app.get("/", (req, res) => {
 });
 app.get("/base", (req, res) => {
     res.render("base.html")
+});
+app.post("/newsfeed/sendpost", (req, res) => {
+    console.log(`Request received: ${req.body}`)
+
+    res.send({status: "OK"})
 });
 
 app.listen(PORT, () => {
