@@ -35,6 +35,7 @@ export function NewsFeed({ postdata }) {
 
       // Or you can work with it as a plain object:
       const formJson = Object.fromEntries(formData.entries());
+      formJson.date = new Date();
       console.log(formJson);
       setPosts([formJson, ...posts])
   }

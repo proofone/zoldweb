@@ -15,14 +15,19 @@ const Message = new Schema({
         default: "John Doe",
         required: false
     },
+    date: {
+        type: Date,
+        default: Date.now
+    },
     body: {
         type: String,
         default: "Roses are Red, Violets are Blue. Unexpected '{' on line 32.",
         required: true
     },
-    date: {
-        type: Date,
-        default: Date.now
+    media: {
+        type: Array,
+        default: "John Doe",
+        required: false
     }
 });
 
