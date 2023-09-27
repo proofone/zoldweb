@@ -78,3 +78,6 @@ web_modules/
 # VisualStudioCode Patch
 # Ignore all local history of files
 **/.history
+public/main.bundle.js
+public/main.css
+package-lock.json
