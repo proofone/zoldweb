@@ -6,13 +6,19 @@ import Form from 'react-bootstrap/Form';
 
 export function BasicPost(props) {
   let postContent = [];
+  let postHeader, postFooter;
+  props.date ? postHeader = [props.date.toLocaleString()] :
+  //TODO: check user is_authenticated
+  postFooter = [<Button variant="outline-primary my-1" size='sm'>Comment</Button>]
+  postHeader && postContent.push(<Card.Header>{postHeader}</Card.Header>)
   props.title && postContent.push(<Card.Title>{props.title}</Card.Title>);
   props.text && postContent.push(<Card.Text>{props.text}</Card.Text>);
+  postFooter && postContent.push(<Card.Footer>{postFooter}</Card.Footer>)
+
   return (
     <Card className={"newsfeed-post"}>
       <Card.Body>
         {postContent}
-        <Button variant="outline-primary my-1">Go somewhere</Button>
       </Card.Body>
     </Card>
   );

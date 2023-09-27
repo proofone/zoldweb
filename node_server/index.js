@@ -3,13 +3,13 @@ const mongoose = require('mongoose')
 //var cors = require('cors');
 
 // Connect MongoDB
-const mongoService = process.env.MONGO_SERVICE || "localhost"
+const mongoService = process.env.MONGO_SERVICE || "0.0.0.0"
 const mongoPort = process.env.MONGO_PORT || 27017;
 const mongoUrl = `mongodb://${mongoService}:${mongoPort}/mini-message-board`;
 mongoose.connect(mongoUrl).then(() => {
     console.log(`MongoDB running at port ${mongoPort}`);    
 }
-).catch(err => console.log(err))
+).catch(err => console.log("MongoDB error:\n" + err))
 
 const PORT = process.env.PORT || 3001;
 
