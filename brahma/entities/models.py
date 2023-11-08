@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
 
@@ -7,6 +7,16 @@ MEMBERSHIP_CHOICES = [
     ("vol", "Volunteer"),
     ("lead", "Leader"),
 ]
+COMM_STATUS_CHOICES = [
+    ("init", "Initial"),
+    ("open", "Open to new members"),
+    ("closed", "Closed"),
+    ("ceased", "Ceased"),
+]
+
+
+class EntityUserManager(BaseUserManager):
+    pass
 
 
 class BaseEntity(models.Model):
@@ -14,10 +24,14 @@ class BaseEntity(models.Model):
     class Meta:
         abstract = True
 
+    name = models.CharField(max_length=255)
     phone = models.CharField(blank=True, max_length=15)  # TODO: regexvalidator
     hometown = models.CharField(blank=True, max_length=255, verbose_name="Tartózkodási hely")
     avatar_photo = models.ImageField(blank=True)
     intro = models.CharField(blank=True, max_length=512)
+
+    def __str__(self) -> str:
+        return self.name or f"{self._meta.verbose_name} {self.pk}"
 
 
 
@@ -26,35 +40,53 @@ class User(BaseEntity, AbstractUser):
     class Meta:
         verbose_name = "User"
 
+    # email_verified = models.BooleanField(default=False)  # TODO: verification with random key
+
+    objects = EntityUserManager()
+    
+    def __str__(self) -> str:
+        disp_name = self.username
+
+        if self.first_name and self.last_name:
+            disp_name = f"{self.last_name} {self.first_name}"  # TODO: int'l names
+            if self.name: disp_name += f" ({self.name})"
+        
+        return disp_name
+
 
 class CommunityMembership(models.Model):
     community = models.ForeignKey('Community', on_delete=models.CASCADE)
     member =  models.ForeignKey('User', on_delete=models.CASCADE)
-    membership_type = models.CharField(choices=MEMBERSHIP_CHOICES, max_length=64)  # TODO
+    membership_type = models.CharField(choices=MEMBERSHIP_CHOICES, default="sup", max_length=64)  # TODO
     member_since = models.DateTimeField(auto_now_add=True)
 
 
 class Community(BaseEntity):
-    name = models.CharField(max_length=255)
+    """Közösségek..."""
+    class Meta:
+        verbose_name = "Community"
+
     slug = models.SlugField(unique=True)
-    location = models.CharField(blank=True, max_length=255)
+    location = models.CharField(blank=True, max_length=255)  # TODO: geodjango geometryfield?
     members = models.ManyToManyField('User', through='CommunityMembership')
-    avatar_photo = models.ImageField(blank=True)
     founded = models.DateField(auto_now_add=True)
     intro = models.CharField(blank=True, max_length=512)
+    status = models.CharField(choices=COMM_STATUS_CHOICES, default="init", max_length=64)  # TODO
 
 
-class Location(models.Model):
+class Location(BaseEntity):
     """Közösségek szempontjából lényeges földrajzi helyek (közösségi terek, tanyák, stb.)"""
-    name = models.CharField(max_length=255)
+    class Meta:
+        verbose_name = "Location"
+
     category = models.CharField(choices=[], max_length=255)  # TODO
-    avatar_photo = models.ImageField(blank=True)
     location = None  # TODO: geodjango geometryfield?
 
 
 class OtherEntity(BaseEntity):
     """Egyéb, közösségek szempontjából lényeges entitások (intézmények, portálok, vállalkozások, személyek, stb.)"""
-    pass
+    class Meta:
+        verbose_name = "Other Entity"
 
 
 # TODO: követések: User -> [Community, User, OtherEntity]
