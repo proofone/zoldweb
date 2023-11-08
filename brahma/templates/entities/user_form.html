@@ -1,0 +1,13 @@
+{% extends 'brahma/base.html' %}
+{% include "csrf_token" %}
+{% block title %}Regisztráció{% endblock title %}
+{% block content %}
+  <h1 class="h1 mb-3">Felhasználói adataid</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-outline-success">
+  </form>
+
+{% endblock %}
+

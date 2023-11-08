@@ -1,0 +1,20 @@
+{% extends 'brahma/base.html' %}
+{% block title %}Közösségek{% endblock title %}
+{% block content %}
+  <h1 class="h1 mb-3">Közösségek</h1>
+  <ul class="list-group my-2">
+    {% for obj in object_list %}
+      <li class="list-group-item flush">
+      <h5 class="mb-2">{{ obj.name }}</h3>
+        <div class="">
+          <span>{{ obj.location }}</span>
+          <span class="float-end">{{ obj.founded.year }}</span>
+        </div>
+      </li>
+    {% empty %}
+    No communities at the moment
+    {% endfor %}
+  </ul>
+      
+{% endblock %}
+
