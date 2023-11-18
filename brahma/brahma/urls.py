@@ -19,11 +19,16 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from entities.views import IndexView, RegisterView
+from entities.views import IndexView, RegisterView, CommunityListView, UserListView, EntityListView, CommunityCreateView, CommunityDetailView
 
 
 urlpatterns = [
-    path('register/', RegisterView.as_view()),
+    path('register/', RegisterView.as_view(), name="register"),
+    path('profile/', RegisterView.as_view(), name="profile"),
+    path('communities/', CommunityListView.as_view(), name="communities"),
+    path('communities/<str:slug>', CommunityDetailView.as_view(), name="community"),
+    path('create-community', CommunityCreateView.as_view(), name="create-community"),
+    path('users/', UserListView.as_view(), name="users"),
     path('admin/', admin.site.urls),
     path('', IndexView.as_view())
 ]

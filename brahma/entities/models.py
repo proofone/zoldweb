@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
+from django.utils.timezone import now
 
 
 MEMBERSHIP_CHOICES = [
@@ -7,11 +8,17 @@ MEMBERSHIP_CHOICES = [
     ("vol", "Volunteer"),
     ("lead", "Leader"),
 ]
+
 COMM_STATUS_CHOICES = [
     ("init", "Initial"),
     ("open", "Open to new members"),
     ("closed", "Closed"),
     ("ceased", "Ceased"),
+]
+
+OTHER_ENTITY_CAT_CHOICES = [
+    ("other", "Other"),
+    # ("open", "Open to new members"),
 ]
 
 
@@ -42,7 +49,7 @@ class User(BaseEntity, AbstractUser):
 
     # email_verified = models.BooleanField(default=False)  # TODO: verification with random key
 
-    objects = EntityUserManager()
+    # objects = EntityUserManager()
     
     def __str__(self) -> str:
         disp_name = self.username
@@ -69,9 +76,14 @@ class Community(BaseEntity):
     slug = models.SlugField(unique=True)
     location = models.CharField(blank=True, max_length=255)  # TODO: geodjango geometryfield?
     members = models.ManyToManyField('User', through='CommunityMembership')
-    founded = models.DateField(auto_now_add=True)
+    founded = models.DateField(default=now())
     intro = models.CharField(blank=True, max_length=512)
     status = models.CharField(choices=COMM_STATUS_CHOICES, default="init", max_length=64)  # TODO
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+
+        return reverse("community", kwargs={"slug": self.slug})
 
 
 class Location(BaseEntity):
@@ -87,6 +99,8 @@ class OtherEntity(BaseEntity):
     """Egyéb, közösségek szempontjából lényeges entitások (intézmények, portálok, vállalkozások, személyek, stb.)"""
     class Meta:
         verbose_name = "Other Entity"
+
+    category = models.CharField(choices=OTHER_ENTITY_CAT_CHOICES, max_length=64)  # TODO
 
 
 # TODO: követések: User -> [Community, User, OtherEntity]
