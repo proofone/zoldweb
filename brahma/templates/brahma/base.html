@@ -12,9 +12,9 @@
 </head>
 <body>
 <div id="main-container" class="container-fluid p-0">
-  {% block nav %}{% include "nav.html" %}{% endblock nav %}
+  {% block nav %}{% include "brahma/nav.html" %}{% endblock nav %}
   <div class="row mx-0">
-    <div id="content" class="col-12">
+    <div id="content" class="col-12 col-md-8 offset-md-2 pb-5">
       {% block content %}
       <h1>
           News Feed
@@ -29,7 +29,7 @@
     </div>
     {% endblock %}
   </div>
-{% block footer %}{% include "footer.html" %}{% endblock footer %}
+{% block footer %}{% include "brahma/footer.html" %}{% endblock footer %}
 </div>
 </body>
 </html>

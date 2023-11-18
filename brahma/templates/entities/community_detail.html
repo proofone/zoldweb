@@ -1,0 +1,8 @@
+{% extends 'brahma/base.html' %}
+{% load i18n %}
+{% block title %}{{ object.name }}{% endblock title %}
+{% block content %}
+  <h1 class="h1 mb-3">{{ object.name }}</h1>
+  <a href="#" class="btn btn-outline-primary">{% trans "Üzenet" %}</a>
+{% endblock %}
+
