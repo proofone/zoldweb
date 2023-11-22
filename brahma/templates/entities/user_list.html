@@ -6,13 +6,7 @@
   <ul class="list-group my-2">
     {% for obj in object_list %}
       <li class="list-group-item rounded-3 my-2">
-      <h5 class="mb-2">
-        {{ obj }}
-      </h5>
-        <div class="">
-          <span>{{ obj.hometown }}</span>
-          <span class="float-end">{{ obj.founded.year }}</span>
-        </div>
+        {% include 'entities/entity_item.html' with obj=obj %}
       </li>
     {% empty %}
       {% trans "No users at the moment" %}
