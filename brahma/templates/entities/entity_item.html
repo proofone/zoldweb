@@ -1,0 +1,13 @@
+<div class="d-flex">
+    <div class="flex-shrink-0">
+        <img src="{{ obj.image.url }}" alt="Kép">
+    </div>
+    <div class="flex-grow-1 ms-3">
+        <div>
+            <span class="h5"><a href="{{ obj.get_absolute_url }}" class="stretched-link text-decoration-none">{{ obj }}</a></span>
+            <small>{{ type }}</small>
+        </div>
+        <span>{{ obj.hometown }}</span>
+        <span class="float-end">{{ obj.founded.year }}</span>
+    </div>
+</div>

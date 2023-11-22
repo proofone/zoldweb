@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.forms import ModelForm
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -13,30 +14,48 @@ from .models import User, Community, Location, OtherEntity
 class BootstrapFormRenderer(TemplatesSetting):
     form_template_name = "forms/form_bs5.html"
 
-    def get_template(self, template_name):
-        return get_template(template_name)
 
-
-class RegisterForm(UserCreationForm):
-    class Meta:
-        model = get_user_model()
-        fields = ("email", "username", )
-        field_classes = {"username": UsernameField}
-
-    # template_name = "brahma/form_bs5.html"
+class BootstrapForm(ModelForm):
     default_renderer = BootstrapFormRenderer
 
     def __init__(self, *args, **kwargs):
-        super(RegisterForm, self).__init__(*args, **kwargs)
+        super(BootstrapForm, self).__init__(*args, **kwargs)
         for field in self.visible_fields():
+            field.field.localize = True
+
             if field.field.widget.attrs.get('class', ""):
                 field.field.widget.attrs['class'] += ' form-control mt-2'
             else:                
                 field.field.widget.attrs['class'] = 'form-control mt-2'
 
 
+class RegisterForm(UserCreationForm, BootstrapForm):
+    class Meta:
+        model = get_user_model()
+        fields = ("email", "username", )
+        field_classes = {"username": UsernameField}
+
+
+class CommunityCreateForm(BootstrapForm, ModelForm):
+    class Meta:
+        model = Community
+        fields = ['name', 'intro', 'location', 'founded']
+
+
 class IndexView(LoginRequiredMixin, generic.ListView):
     model = Community
+
+
+class RegisterView(generic.CreateView):
+    form_class = RegisterForm
+    template_name = "entities/user_form.html"
+    success_url = "/"
+
+
+class CommunityCreateView(LoginRequiredMixin, generic.CreateView):
+    form_class = CommunityCreateForm
+    template_name = "entities/community_form.html"
+    success_url = "/"
         
 
 class CommunityListView(LoginRequiredMixin, generic.ListView):
@@ -51,44 +70,15 @@ class UserListView(LoginRequiredMixin, generic.ListView):
     model = User
 
 
-class RegisterView(generic.CreateView):
-    form_class = RegisterForm
-    template_name = "entities/user_form.html"
-    success_url = "/"
-        
-
-class CommunityCreateView(LoginRequiredMixin, generic.CreateView):
-    model = Community
-    fields = ['name', 'intro', 'location', 'founded']
-
-
 class CommunityDetailView(LoginRequiredMixin, generic.DetailView):
     model = Community
 
 
-def userlist(request, ):
-    
-    return None
+class UserDetailView(LoginRequiredMixin, generic.DetailView):
+    model = User
 
 
-def userdetail(request, ):
-    
-    return render(request, '../')
+class EntityDetailView(LoginRequiredMixin, generic.DetailView):
+    model = OtherEntity
 
-def communitylist(request, ):
-    return None
 
-def communitydetail(request, ):
-    return None
-
-def communitymap(request, ):
-    return None
-
-def otherentitylist(request, ):
-    return None
-
-def otherentitydetail(request, ):
-    return None
-
-def otherentitymap(request, ):
-    return None

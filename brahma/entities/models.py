@@ -1,12 +1,15 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.utils.timezone import now
+from datetime import date
+from django.urls import reverse
 
 
 MEMBERSHIP_CHOICES = [
     ("sup", "Supporter"),
     ("vol", "Volunteer"),
     ("lead", "Leader"),
+    ("admin", "Administrator"),
 ]
 
 COMM_STATUS_CHOICES = [
@@ -16,7 +19,17 @@ COMM_STATUS_CHOICES = [
     ("ceased", "Ceased"),
 ]
 
+LOCATION_CAT_CHOICES = [
+    ("farm", "Farm"),
+    ("commgard", "Community garden"),
+    ("commhub", "Community hub"),
+    ("park", "Park"),
+    ("venue", "Public venue"),
+    # ("open", "Open to new members"),
+]
+
 OTHER_ENTITY_CAT_CHOICES = [
+    ("org", "Organization"),
     ("other", "Other"),
     # ("open", "Open to new members"),
 ]
@@ -31,11 +44,12 @@ class BaseEntity(models.Model):
     class Meta:
         abstract = True
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=50)
     phone = models.CharField(blank=True, max_length=15)  # TODO: regexvalidator
     hometown = models.CharField(blank=True, max_length=255, verbose_name="Tartózkodási hely")
     avatar_photo = models.ImageField(blank=True)
     intro = models.CharField(blank=True, max_length=512)
+    created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
         return self.name or f"{self._meta.verbose_name} {self.pk}"
@@ -49,8 +63,6 @@ class User(BaseEntity, AbstractUser):
 
     # email_verified = models.BooleanField(default=False)  # TODO: verification with random key
 
-    # objects = EntityUserManager()
-    
     def __str__(self) -> str:
         disp_name = self.username
 
@@ -59,6 +71,11 @@ class User(BaseEntity, AbstractUser):
             if self.name: disp_name += f" ({self.name})"
         
         return disp_name
+
+    def get_absolute_url(self):
+        
+
+        return reverse("user", kwargs={"pk": self.pk})
 
 
 class CommunityMembership(models.Model):
@@ -76,14 +93,14 @@ class Community(BaseEntity):
     slug = models.SlugField(unique=True)
     location = models.CharField(blank=True, max_length=255)  # TODO: geodjango geometryfield?
     members = models.ManyToManyField('User', through='CommunityMembership')
-    founded = models.DateField(default=now())
-    intro = models.CharField(blank=True, max_length=512)
+    founded = models.DateField(default=date.today)
     status = models.CharField(choices=COMM_STATUS_CHOICES, default="init", max_length=64)  # TODO
 
     def get_absolute_url(self):
-        from django.urls import reverse
-
         return reverse("community", kwargs={"slug": self.slug})
+    
+    def get_memberships(self):
+        return CommunityMembership.objects.filter(community=self)
 
 
 class Location(BaseEntity):
@@ -91,7 +108,7 @@ class Location(BaseEntity):
     class Meta:
         verbose_name = "Location"
 
-    category = models.CharField(choices=[], max_length=255)  # TODO
+    category = models.CharField(choices=LOCATION_CAT_CHOICES, max_length=255)  # TODO
     location = None  # TODO: geodjango geometryfield?
 
 

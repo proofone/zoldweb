@@ -19,7 +19,9 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from entities.views import IndexView, RegisterView, CommunityListView, UserListView, EntityListView, CommunityCreateView, CommunityDetailView
+from entities.views import IndexView, RegisterView, CommunityListView, \
+    UserListView, EntityListView, CommunityCreateView, UserDetailView, \
+    CommunityDetailView
 
 
 urlpatterns = [
@@ -28,7 +30,9 @@ urlpatterns = [
     path('communities/', CommunityListView.as_view(), name="communities"),
     path('communities/<str:slug>', CommunityDetailView.as_view(), name="community"),
     path('create-community', CommunityCreateView.as_view(), name="create-community"),
+    path('users/<int:pk>/', UserDetailView.as_view(), name="user"),
     path('users/', UserListView.as_view(), name="users"),
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
     path('', IndexView.as_view())
 ]

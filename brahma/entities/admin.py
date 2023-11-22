@@ -1,5 +1,9 @@
 from django.contrib import admin
-from entities.models import User, Community, Location, OtherEntity
+from entities.models import User, Community, Location, OtherEntity, CommunityMembership
+
+
+class CommunityMembershipInline(admin.TabularInline):
+    model = Community.members.through
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -8,6 +12,7 @@ class UserAdmin(admin.ModelAdmin):
 
 class CommunityAdmin(admin.ModelAdmin):
     exclude =  []
+    inlines = [CommunityMembershipInline]
 
 
 class LocationAdmin(admin.ModelAdmin):
