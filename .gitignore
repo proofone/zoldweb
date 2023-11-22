@@ -81,3 +81,5 @@ web_modules/
 public/main.bundle.js
 public/main.css
 package-lock.json
+.vscode/launch.json
+.vscode/tasks.json
