@@ -42,8 +42,8 @@ class CommunityCreateForm(BootstrapForm, ModelForm):
         fields = ['name', 'intro', 'location', 'founded']
 
 
-class IndexView(LoginRequiredMixin, generic.ListView):
-    model = Community
+class IndexView(generic.TemplateView):
+    template_name = "brahma/index.html"
 
 
 class RegisterView(generic.CreateView):
