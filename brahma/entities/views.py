@@ -1,45 +1,12 @@
+from typing import Any
 from django.conf import settings
-from django.forms import ModelForm
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, HttpResponse
+from django.urls import reverse
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.forms import UserCreationForm, UsernameField
-from django.forms.renderers import DjangoDivFormRenderer, TemplatesSetting
-from django.template.loader import get_template
 
-from django.contrib.auth import get_user_model
-from .models import User, Community, Location, OtherEntity
-
-
-class BootstrapFormRenderer(TemplatesSetting):
-    form_template_name = "forms/form_bs5.html"
-
-
-class BootstrapForm(ModelForm):
-    default_renderer = BootstrapFormRenderer
-
-    def __init__(self, *args, **kwargs):
-        super(BootstrapForm, self).__init__(*args, **kwargs)
-        for field in self.visible_fields():
-            field.field.localize = True
-
-            if field.field.widget.attrs.get('class', ""):
-                field.field.widget.attrs['class'] += ' form-control mt-2'
-            else:                
-                field.field.widget.attrs['class'] = 'form-control mt-2'
-
-
-class RegisterForm(UserCreationForm, BootstrapForm):
-    class Meta:
-        model = get_user_model()
-        fields = ("email", "username", )
-        field_classes = {"username": UsernameField}
-
-
-class CommunityCreateForm(BootstrapForm, ModelForm):
-    class Meta:
-        model = Community
-        fields = ['name', 'intro', 'location', 'founded']
+from .forms import CommunityForm, RegisterForm, UserProfileForm
+from .models import User, Community, CommunityMembership, Location, OtherEntity
 
 
 class IndexView(generic.TemplateView):
@@ -53,9 +20,25 @@ class RegisterView(generic.CreateView):
 
 
 class CommunityCreateView(LoginRequiredMixin, generic.CreateView):
-    form_class = CommunityCreateForm
+    form_class = CommunityForm
     template_name = "entities/community_form.html"
-    success_url = "/"
+
+    def get_success_url(self) -> str:
+        comm_obj = self.get_form().instance
+        CommunityMembership.objects.create(community=comm_obj, member=self.request.user, membership_type="admin")
+        
+        return reverse('community', args=[comm_obj.slug])
+
+
+class EntityCreateView(LoginRequiredMixin, generic.CreateView):
+    form_class = CommunityForm
+    template_name = "entities/community_form.html"
+
+    def get_success_url(self) -> str:
+        comm_obj = self.get_form().instance
+        CommunityMembership.objects.create(community=comm_obj, member=self.request.user, membership_type="admin")
+        
+        return reverse('community', args=[comm_obj.slug])
         
 
 class CommunityListView(LoginRequiredMixin, generic.ListView):
@@ -74,11 +57,31 @@ class CommunityDetailView(LoginRequiredMixin, generic.DetailView):
     model = Community
 
 
+class EntityDetailView(LoginRequiredMixin, generic.DetailView):
+    model = OtherEntity
+
+
 class UserDetailView(LoginRequiredMixin, generic.DetailView):
     model = User
 
 
-class EntityDetailView(LoginRequiredMixin, generic.DetailView):
-    model = OtherEntity
+class ProfileView(LoginRequiredMixin, generic.FormView):
+    def get_form_kwargs(self) -> dict[str, Any]:
+        return {'instance': self.request.user}
 
+    form_class = UserProfileForm
+    template_name = "entities/user_form.html"
+    success_url = "/"
+
+
+class CommunityUpdateView(LoginRequiredMixin, generic.UpdateView):
+    form_class = CommunityForm
+    template_name = "entities/community_form.html"
+
+    def get_success_url(self) -> str:
+        comm_obj = self.get_form().instance
+        CommunityMembership.objects.create(community=comm_obj, member=self.request.user, membership_type="admin")
+        
+        return reverse('community', args=[comm_obj.slug])
+        
 

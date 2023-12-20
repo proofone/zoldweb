@@ -3,6 +3,7 @@
 {% block title %}{{ object.name }}{% endblock title %}
 {% block content %}
   <h1 class="h1 mb-3">{{ object.name }}</h1>
+  {% if request.user in object.get_admins %}{% else %}{% endif %}
   <a href="#" class="btn btn-outline-primary">{% trans "Message" %}</a>
   <h3 class="h3">{% trans "Members" %}</h3>
   <ul class="list-group my-2 ms-3">

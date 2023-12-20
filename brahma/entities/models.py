@@ -15,6 +15,7 @@ MEMBERSHIP_CHOICES = [
 COMM_STATUS_CHOICES = [
     ("init", "Initial"),
     ("open", "Open to new members"),
+    ("closed_temp", "Temporarily closed"),
     ("closed", "Closed"),
     ("ceased", "Ceased"),
 ]
@@ -25,13 +26,11 @@ LOCATION_CAT_CHOICES = [
     ("commhub", "Community hub"),
     ("park", "Park"),
     ("venue", "Public venue"),
-    # ("open", "Open to new members"),
 ]
 
 OTHER_ENTITY_CAT_CHOICES = [
     ("org", "Organization"),
     ("other", "Other"),
-    # ("open", "Open to new members"),
 ]
 
 
@@ -103,6 +102,13 @@ class Community(BaseEntity):
         return CommunityMembership.objects.filter(community=self)
 
 
+class CommunityEnterprise(BaseEntity):
+    """Közösségi vállalkozások"""
+    class Meta:
+        verbose_name = "Community Enterprise"
+
+
+
 class Location(BaseEntity):
     """Közösségek szempontjából lényeges földrajzi helyek (közösségi terek, tanyák, stb.)"""
     class Meta:
@@ -118,6 +124,7 @@ class OtherEntity(BaseEntity):
         verbose_name = "Other Entity"
 
     category = models.CharField(choices=OTHER_ENTITY_CAT_CHOICES, max_length=64)  # TODO
+    admins = models.ManyToManyField('User')
 
 
 # TODO: követések: User -> [Community, User, OtherEntity]

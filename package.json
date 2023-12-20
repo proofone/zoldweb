@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node node_server/index_t.js",
-    "wpdevserve": "webpack serve --open --watch-options-poll",
-    "build": "webpack"
+    "wpdevserve": "webpack serve --watch-options-poll",
+    "build": "webpack --config ./react_client/webpack.config.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,7 +16,6 @@
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "mongodb": "6.3",
-    "mongoose": "^7.2.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0"
