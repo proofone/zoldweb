@@ -7,19 +7,20 @@ import Form from 'react-bootstrap/Form';
 export function BasicPost(props) {
   let postContent = [];
   let postHeader, postFooter;
-  props.date ? postHeader = [props.date.toLocaleString()] :
+  props.date ? postHeader = [props.date.toLocaleString()] : null
   //TODO: check user is_authenticated
-  postFooter = [<Button variant="outline-primary my-1" size='sm'>Comment</Button>]
-  postHeader && postContent.push(<Card.Header>{postHeader}</Card.Header>)
+  const postButtons = [<Button variant="outline-primary my-1" size='sm'>Comment</Button>]
   props.title && postContent.push(<Card.Title>{props.title}</Card.Title>);
   props.text && postContent.push(<Card.Text>{props.text}</Card.Text>);
-  postFooter && postContent.push(<Card.Footer>{postFooter}</Card.Footer>)
+  postFooter = <Card.Footer>{postButtons}</Card.Footer>
 
   return (
     <Card className={"newsfeed-post"}>
+      <Card.Header>{postHeader}</Card.Header>
       <Card.Body>
         {postContent}
       </Card.Body>
+      {postFooter}
     </Card>
   );
 }
@@ -33,16 +34,14 @@ export function NewsFeed({ postdata }) {
       e.preventDefault();
 
       // Read the form data
-      const form = e.target;
-      const formData = new FormData(form);
-
-      // Passing formData to the API:
-      fetch('/newsfeed/sendpost', { method: form.method, body: formData });
-
-      // Or you can work with it as a plain object:
+      const formData = new FormData(e.target);
+      formData.append('created_date', new Date());
       const formJson = Object.fromEntries(formData.entries());
-      formJson.date = new Date();
-      console.log(formJson);
+
+      // Passing formData to the API
+      fetch('/newsfeed/sendpost', { method: e.target.method, body: formData });
+
+      // Pushing new post to feed
       setPosts([formJson, ...posts])
   }
 

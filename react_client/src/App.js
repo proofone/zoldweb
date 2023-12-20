@@ -4,12 +4,10 @@ import './scss/styles.scss';
 
 
 let errorlog = []
-const statusInfoBox = document.querySelector("#debug-info")
-//const postformroot = createRoot(document.getElementById('post-form'))
-//postformroot.render(<NewsFeedPostForm />)
+const debugInfoBox = document.querySelector("#debug-info")
 
 const root = createRoot(document.getElementById('main-feed'))
-const demodata = require('../tests/newsfeed_test_data')
+const demodata = require('../../tests/newsfeed_test_data')
 const posts = demodata.posts || []
 root.render(<NewsFeed postdata={ posts } />);
 
@@ -26,7 +24,7 @@ request.onerror = (event) => {
 request.onsuccess = (event) => {
     idb = event.target.result
     console.log("IDB Success!")
-    statusInfoBox ? statusInfoBox.innerHTML = "IDB init successful" :
+    debugInfoBox ? debugInfoBox.innerHTML = "IDB init successful" :
 
     idb.onerror = (event) => {
         // Generic error handler for all errors targeted at IndexedDB requests

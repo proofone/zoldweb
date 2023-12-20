@@ -7,7 +7,7 @@ module.exports = {
 
   devtool: 'inline-source-map',
   devServer: {
-    static: './public',
+    static: '../public',
     port: 3002
   },
   optimization: {
@@ -15,18 +15,18 @@ module.exports = {
   },
 
   entry: {
-    'main': './src/App.js'
+    'main': './react_client/src/App.js'
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Development',
-      template: 'templates/base.html'
-    }),
+    // new HtmlWebpackPlugin({
+    //   title: 'Development',
+    //   template: 'templates/base.html'
+    // }),
     new MiniCssExtractPlugin(),
   ],
-  output: {
+  output: { 
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'public'),
+    path: path.resolve(__dirname, '../public'),
   },
 
   module: {
@@ -46,6 +46,7 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
+        exclude: /node_modules/,
         use: 'ts-loader',
       },      
       {
