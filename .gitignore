@@ -36,6 +36,7 @@ cover/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+**/migrations
 
 # NodeJS Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json

@@ -74,8 +74,6 @@ TEMPLATES = [
     },
 ]  # TODO: unite templates dir with ExpressJS
 
-# FORM_RENDERER: 'brahma.entities.views.BootstrapFormRenderer'  # TODO: has no effect for some reason...
-
 WSGI_APPLICATION = 'brahma.wsgi.application'
 
 
@@ -86,7 +84,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
+    # TODO:'contents': https://www.mongodb.com/compatibility/mongodb-and-django
 }
 
 AUTH_USER_MODEL = 'entities.User'
