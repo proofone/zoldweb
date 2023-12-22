@@ -26,16 +26,16 @@ from entities.api_views import communities, users
 
 
 urlpatterns = [
-    path('register/', RegisterView.as_view(), name="register"),
-    path('profile/', ProfileView.as_view(), name="profile"),
-    path('api/communities/', communities, name="api-communities"),
-    path('api/users/', users, name="api-users"),
-    path('communities/', CommunityListView.as_view(), name="communities"),
-    path('communities/<str:slug>', CommunityDetailView.as_view(), name="community"),
-    path('create-community', CommunityCreateView.as_view(), name="create-community"),
-    path('create-other-entity', EntityCreateView.as_view(), name="create-community"),
-    path('users/<int:pk>/', UserDetailView.as_view(), name="user"),
-    path('users/', UserListView.as_view(), name="users"),
+    # path('register/', RegisterView.as_view(), name="register"),
+    # path('profile/', ProfileView.as_view(), name="profile"),
+    # path('api/communities/', communities, name="api-communities"),
+    # path('api/users/', users, name="api-users"),
+    # path('communities/', CommunityListView.as_view(), name="communities"),
+    # path('communities/<str:slug>', CommunityDetailView.as_view(), name="community"),
+    # path('create-community', CommunityCreateView.as_view(), name="create-community"),
+    # path('create-other-entity', EntityCreateView.as_view(), name="create-community"),
+    # path('users/<int:pk>/', UserDetailView.as_view(), name="user"),
+    # path('users/', UserListView.as_view(), name="users"),
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
     path('', IndexView.as_view())
