@@ -70,11 +70,9 @@ web_modules/
 .npm
 
 # VisualStudioCode
-.vscode/*      # Maybe .vscode/**/* instead - see comments
-!.vscode/settings.json
+.vscode/*
 !.vscode/tasks.json
 !.vscode/launch.json
-!.vscode/extensions.json
 
 # VisualStudioCode Patch
 # Ignore all local history of files
@@ -82,4 +80,5 @@ web_modules/
 public/main.bundle.js
 public/main.css
 package-lock.json
+
 
