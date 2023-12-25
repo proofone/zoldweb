@@ -5,6 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
             "command": "npm start",
             "name": "Run npm start",
             "request": "launch",
@@ -16,7 +24,8 @@
             "request": "launch",
             "program": "${workspaceFolder}/brahma/manage.py",
             "args": [
-                "runserver", "38123"
+                "runserver",
+                "38123"
             ],
             "django": true,
             "justMyCode": false
