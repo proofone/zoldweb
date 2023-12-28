@@ -3,7 +3,9 @@
 {% block title %}Közösségek{% endblock title %}
 {% block content %}
   <h1 class="h1 mb-3">Közösségek</h1>
-  <a href="{% url "create-community" %}" class="btn btn-outline-primary">{% trans "Létrehozás" %}</a>
+  {% if user.is_authenticated %}
+    <a href="{% url "create-community" %}" class="btn btn-outline-primary">{% trans "Létrehozás" %}</a>
+  {% endif %}
   <ul class="list-group my-2">
     {% for obj in object_list %}
       <li class="list-group-item rounded-3 my-2">
