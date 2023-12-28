@@ -15,3 +15,8 @@ DATABASES = {
         'PASSWORD': os.environ['DBPASS'] 
     }
 }
+
+STATIC_URL = os.environ.get("DJANGO_STATIC_URL", "/static/")
+STATIC_ROOT = os.environ.get("DJANGO_STATIC_ROOT", "./static/")
+STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
+

@@ -141,6 +141,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 if 'WEBSITE_HOSTNAME' in os.environ: # Running on Azure
     from .azure import *
+    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+    INSTALLED_APPS.insert(1, "whitenoise.runserver_nostatic")
 
 try:
     from .local_settings import *
