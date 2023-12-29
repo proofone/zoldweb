@@ -16,8 +16,8 @@ DATABASES = {
     }
 }
 
-STATIC_URL = os.environ.get("DJANGO_STATIC_URL", "/static/")
-STATIC_ROOT = os.environ.get("DJANGO_STATIC_ROOT", "./static/")
+STATIC_URL = os.environ.get("DJANGO_STATIC_URL", "static/")
+STATIC_ROOT = os.environ.get("DJANGO_STATIC_ROOT", "../static/")
 STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
 
 LOGGING = {
