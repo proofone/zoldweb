@@ -17,16 +17,28 @@ DATABASES = {
 }
 
 STATIC_URL = os.environ.get("DJANGO_STATIC_URL", "static/")
-STATIC_ROOT = os.environ.get("DJANGO_STATIC_ROOT", "../static/")
+STATIC_ROOT = os.environ.get("DJANGO_STATIC_ROOT", "./static/")
 STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
 
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{asctime} {levelname} {module} {process:d} {thread:d} {message}",
+            "datefmt": '%Y-%m-%d %H:%M:%S',
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+    },
     "handlers": {
         "file": {
             "level": "INFO",
             "class": "logging.FileHandler",
+            "formatter": "verbose",
             "filename": "/home/site/wwwroot/python_log.txt",
         },
     },
