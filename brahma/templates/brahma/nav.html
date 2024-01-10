@@ -1,6 +1,6 @@
 {% load i18n %}
 <div>
-<nav class="navbar navbar-expand-md bg-body-secondary">
+<nav class="navbar navbar-expand-md sticky-top bg-body-secondary">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">Komaháló<span class="badge bg-warning mx-1">demo</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -33,10 +33,14 @@
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Feedback
+                    </a> 
+                    <form class="dropdown-menu bg-body-secondary p-2" id="fb-form">
+                        <textarea class="form-control mb-2" type="text" placeholder="Your feedback" aria-label="Feedback"></textarea>
+                        <button class="btn btn-outline-primary" type="submit">Send</button>
                     </form>
                 </li>
                 {% if user.is_authenticated %}

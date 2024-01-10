@@ -1,6 +1,5 @@
 {% extends 'brahma/base.html' %}
 {% load i18n %}
-{% include "csrf_token" %}
 {% block title %}Főoldal{% endblock title %}
 {% block content %}
   <div class="col-12 m-0 fs-1 text-center">
@@ -9,7 +8,8 @@
   <div class="col-12">
       <div class="h5 my-3">Közösségek</div>
       <div class="ratio ratio-4x3">
-          <iframe src="https://www.google.com/maps/d/embed?mid=1Rws27ynW6UFELCxaL3MqvK8cIA6wt1sO&ehbc=2E312F"></iframe>
+            Térkép helye
+          {% comment %} <iframe src="https://www.google.com/maps/d/embed?mid=1Rws27ynW6UFELCxaL3MqvK8cIA6wt1sO&ehbc=2E312F"></iframe> {% endcomment %}
       </div>
       
   </div>
