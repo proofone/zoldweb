@@ -8,7 +8,7 @@
     {% if "profile" in request.path %}Profil módosítása - {{ request.user }}{% else %}Regisztráció{% endif %}
   </h1>
   <div class="row justify-content-center">
-    <div class="col">
+    <div class="col col-md-6">
       <form method="POST" class="form-floating">
         {% csrf_token %}
         {{ form }}

@@ -4,6 +4,11 @@
 {% block title %}Bejelentkezés{% endblock title %}
 {% block content %}
   <h1 class="h1 my-3">Bejelentkezés</h1>
+  {% if request.GET.next and request.GET.next != "/" %}
+    <div class="fs-6 my-3">
+      A kért oldal csak regisztrált felhasználóink számára érhető el. Jelentkezzz be, vagy <a href="{% url "register" %}?next={{ request.GET.next }}">regisztrálj</a>.
+    </div>
+  {% endif %}
   <div class="row justify-content-center">
     <div class="col">
       <form method="POST" class="form-floating">
