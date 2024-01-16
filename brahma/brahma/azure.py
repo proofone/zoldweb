@@ -19,7 +19,7 @@ DATABASES = {
 STATIC_URL = os.environ.get("DJANGO_STATIC_URL", "static/")
 STATIC_ROOT = os.environ.get("DJANGO_STATIC_ROOT", "./static/")
 STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
-STATICFILES_DIRS = ['./static']
+STATICFILES_DIRS = ['../static']
 
 LOGGING = {
     "version": 1,

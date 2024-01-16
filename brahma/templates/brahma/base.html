@@ -15,19 +15,8 @@
   {% block nav %}{% include "brahma/nav.html" %}{% endblock nav %}
   <div class="row">
     <div id="content" class="col-12 col-md-8 offset-md-2">
-      {% block content %}
-      <h1>
-          News Feed
-      </h1>
-      <p id="debug-info"></p>
-    </div>
-    <div id="post-form" class="col-12 col-md-8 offset-md-2">
-
-    </div>
-    <div id="main-feed" class="col-12 col-md-8 offset-md-2">
-
-    </div>
-    {% endblock %}
+      {% block content %}{% endblock content %}
+      
   </div>
 {% block footer %}{% include "brahma/footer.html" %}{% endblock footer %}
 </div>
