@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 import django
 from django.forms.renderers import TemplatesSetting
@@ -28,7 +29,7 @@ SECRET_KEY = None
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -137,6 +138,11 @@ STATICFILES_DIRS = []
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+if 'WEBSITE_HOSTNAME' in os.environ: # Running on Azure
+    from .azure import *
+    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+    INSTALLED_APPS.insert(1, "whitenoise.runserver_nostatic")
 
 try:
     from .local_settings import *
