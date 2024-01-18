@@ -12,8 +12,12 @@
       <form method="POST" class="form-floating">
         {% csrf_token %}
         {{ form }}
-        <div class="text-center">
-          <input type="submit" class="btn btn-outline-success mt-2 px-4" value={% trans "Submit" %}>
+        <div class="btn-group-sm d-flex justify-content-between mt-2">
+          <input type="submit" class="btn btn-outline-success flex-grow-1" value={% trans "Submit" %}>
+          {% if "profile" in request.path %}
+          <input type="reset" class="btn btn-outline-warning ms-3" value={% trans "Reset" %}>
+          {% endif %}
+          <button onclick="history.back()" class="btn btn-outline-danger ms-3">{% trans "Cancel" %}</button>
         </div>
       </form>
       
