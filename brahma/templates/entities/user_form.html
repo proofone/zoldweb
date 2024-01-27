@@ -1,29 +1,38 @@
 {% extends 'brahma/base.html' %}
 {% load i18n %}
-{% include "csrf_token" %}
 
 {% block title %}{% if "profile" in request.path %}Profil{% else %}Regisztráció{% endif %}{% endblock title %}
 {% block content %}
-  <h1 class="h1 my-3">
+{% if "register" in request.path and request.user.is_authenticated %}
+<div class="mt-5 alert alert-danger">
+  {% trans "You are already signed in. If you would like to register an other user, please sign out first" %}
+  <a href="{% url "logout" %}" class="btn btn-secondary my-3">{% trans "Sign out" %}</a>
+</div>
+{% else %}
+  <div class="h3 my-3">
     {% if "profile" in request.path %}Profil módosítása - {{ request.user }}{% else %}Regisztráció{% endif %}
-  </h1>
+  </div>
   <div class="row justify-content-center">
     <div class="col col-md-6">
       <form method="POST" class="form-floating">
         {% csrf_token %}
+        <input type="hidden" name="inv_id" value="{{ request.GET.iid }}">
         {{ form }}
         <div class="btn-group-sm d-flex justify-content-between mt-2">
           <input type="submit" class="btn btn-outline-success flex-grow-1" value={% trans "Submit" %}>
-          {% if "profile" in request.path %}
+        {% if "profile" in request.path %}
           <input type="reset" class="btn btn-outline-warning ms-3" value={% trans "Reset" %}>
-          {% endif %}
           <button onclick="history.back()" class="btn btn-outline-danger ms-3">{% trans "Cancel" %}</button>
         </div>
+        <div class="my-2">Jelszavad megváltoztatásához <a href="{% url "password_change" %}">kattints ide</a></div>
+        {% else %}
+        </div>
+        {% endif %}
       </form>
       
     </div>
 
   </div>
-
+{% endif %}
 {% endblock %}
 

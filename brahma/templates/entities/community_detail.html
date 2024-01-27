@@ -8,7 +8,7 @@
   <h3 class="h3">{% trans "Members" %}</h3>
   <ul class="list-group my-2 ms-3">
     {% for ms in object.get_memberships %}
-      <li class="list-group-item">
+      <li class="list-group-item rounded-3 my-2">
         {% include 'entities/entity_item.html' with obj=ms.member type=ms.membership_type %}
       </li>
     {% empty %}
