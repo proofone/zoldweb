@@ -18,24 +18,30 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 from entities.views import EntityCreateView, IndexView, RegisterView, CommunityListView, \
-    UserListView, EntityListView, CommunityCreateView, UserDetailView, \
-    CommunityDetailView, ProfileView
+    UserListView, EntityListView, EntityDetailView, CommunityCreateView, UserDetailView, \
+    CommunityDetailView, ConfirmEmailView, ProfileView, SendInvitationView
 from entities.api_views import communities, users
 
 
 urlpatterns = [
     path('register/', RegisterView.as_view(), name="register"),
+    # path('register/confirm/', ConfirmEmailView.as_view(), name="register"),
     path('profile/', ProfileView.as_view(), name="profile"),
+    path('send-invitation/', SendInvitationView.as_view(), name="send-invitation"),
     path('api/communities/', communities, name="api-communities"),
     path('api/users/', users, name="api-users"),
     path('communities/', CommunityListView.as_view(), name="communities"),
     path('communities/<str:slug>', CommunityDetailView.as_view(), name="community"),
+    path('orgs/', EntityListView.as_view(), name="otherentities"),
+    path('orgs/<str:slug>', EntityDetailView.as_view(), name="otherentity"),
     path('create-community', CommunityCreateView.as_view(), name="create-community"),
-    path('create-other-entity', EntityCreateView.as_view(), name="create-community"),
+    path('create-other-entity', EntityCreateView.as_view(), name="create-otherentity"),
     path('users/<int:pk>/', UserDetailView.as_view(), name="user"),
     path('users/', UserListView.as_view(), name="users"),
+    path('app/', TemplateView.as_view(template_name = "brahma/app.html"), name="appview"),
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
     path('', IndexView.as_view())

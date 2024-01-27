@@ -1,5 +1,5 @@
 from django.contrib import admin
-from entities.models import User, Community, Location, OtherEntity, CommunityMembership
+from entities.models import User, Community, Location, OtherEntity, Invitation
 
 
 class CommunityMembershipInline(admin.TabularInline):
@@ -23,7 +23,12 @@ class OtherEntityAdmin(admin.ModelAdmin):
     exclude =  []
 
 
+class InvitationAdmin(admin.ModelAdmin):
+    exclude =  []
+
+
 admin.site.register(User, UserAdmin)
 admin.site.register(Community, CommunityAdmin)
 admin.site.register(OtherEntity, OtherEntityAdmin)
 admin.site.register(Location, LocationAdmin)
+admin.site.register(Invitation, InvitationAdmin)
