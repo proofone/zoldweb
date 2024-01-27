@@ -4,7 +4,7 @@ $primary: #09865cbb;
 $border-radius: .1rem;
 
 body {
-    padding-bottom: 24px;
+    padding-bottom: 3em;
 }
 
 .newsfeed-post {
@@ -25,3 +25,11 @@ body {
 
 @import "~bootstrap/scss/bootstrap"; // Import all of Bootstrap's CSS
 //TODO: individual imports
+
+form.form-bs5>div>input {
+    @extend .form-control
+}
+
+form.form-bs5>div>label {
+    @extend .form-label
+}

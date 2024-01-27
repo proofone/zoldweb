@@ -1,36 +1,39 @@
+import uuid
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.utils.timezone import now
 from datetime import date
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 
 MEMBERSHIP_CHOICES = [
-    ("sup", "Supporter"),
-    ("vol", "Volunteer"),
-    ("lead", "Leader"),
-    ("admin", "Administrator"),
+    ("sup", _("Supporter")),
+    ("vol", _("Volunteer")),
+    ("lead", _("Leader")),
+    ("admin", _("Administrator")),
 ]
 
 COMM_STATUS_CHOICES = [
-    ("init", "Initial"),
-    ("open", "Open to new members"),
-    ("closed_temp", "Temporarily closed"),
-    ("closed", "Closed"),
-    ("ceased", "Ceased"),
+    ("init", _("Initial")),
+    ("open", _("Open to new members")),
+    ("closed_temp", _("Temporarily closed")),
+    ("closed", _("Closed")),
+    ("ceased", _("Ceased")),
 ]
 
 LOCATION_CAT_CHOICES = [
-    ("farm", "Farm"),
-    ("commgard", "Community garden"),
-    ("commhub", "Community hub"),
-    ("park", "Park"),
-    ("venue", "Public venue"),
+    ("farm", _("Farm")),
+    ("commgard", _("Community garden")),
+    ("commhub", _("Community hub")),
+    ("park", _("Park")),
+    ("venue", _("Public venue")),
 ]
 
 OTHER_ENTITY_CAT_CHOICES = [
-    ("org", "Organization"),
-    ("other", "Other"),
+    ("org", _("Organization")),
+    ("other", _("Other")),
 ]
 
 
@@ -45,7 +48,7 @@ class BaseEntity(models.Model):
 
     name = models.CharField(max_length=50)
     phone = models.CharField(blank=True, max_length=15)  # TODO: regexvalidator
-    hometown = models.CharField(blank=True, max_length=255, verbose_name="Tartózkodási hely")
+    hometown = models.CharField(blank=True, max_length=255, verbose_name=_("Tartózkodási hely"))
     avatar_photo = models.ImageField(blank=True)
     intro = models.CharField(blank=True, max_length=512)
     created_date = models.DateTimeField(auto_now_add=True)
@@ -58,7 +61,7 @@ class BaseEntity(models.Model):
 class User(BaseEntity, AbstractUser):
     """A rendszert használó összes természetes személy (tartalmazza a hozzáférést is)"""
     class Meta:
-        verbose_name = "User"
+        verbose_name = _("User")
 
     # email_verified = models.BooleanField(default=False)  # TODO: verification with random key
 
@@ -72,8 +75,6 @@ class User(BaseEntity, AbstractUser):
         return disp_name
 
     def get_absolute_url(self):
-        
-
         return reverse("user", kwargs={"pk": self.pk})
 
 
@@ -87,7 +88,7 @@ class CommunityMembership(models.Model):
 class Community(BaseEntity):
     """Közösségek..."""
     class Meta:
-        verbose_name = "Community"
+        verbose_name = _("Community")
 
     slug = models.SlugField(unique=True)
     location = models.CharField(blank=True, max_length=255)  # TODO: geodjango geometryfield?
@@ -105,14 +106,14 @@ class Community(BaseEntity):
 class CommunityEnterprise(BaseEntity):
     """Közösségi vállalkozások"""
     class Meta:
-        verbose_name = "Community Enterprise"
+        verbose_name = _("Community Enterprise")
 
 
 
 class Location(BaseEntity):
     """Közösségek szempontjából lényeges földrajzi helyek (közösségi terek, tanyák, stb.)"""
     class Meta:
-        verbose_name = "Location"
+        verbose_name = _("Location")
 
     category = models.CharField(choices=LOCATION_CAT_CHOICES, max_length=255)  # TODO
     location = None  # TODO: geodjango geometryfield?
@@ -121,10 +122,17 @@ class Location(BaseEntity):
 class OtherEntity(BaseEntity):
     """Egyéb, közösségek szempontjából lényeges entitások (intézmények, portálok, vállalkozások, személyek, stb.)"""
     class Meta:
-        verbose_name = "Other Entity"
+        verbose_name = _("Other Entity")
 
     category = models.CharField(choices=OTHER_ENTITY_CAT_CHOICES, max_length=64)  # TODO
     admins = models.ManyToManyField('User')
+
+
+class Invitation(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    sender = models.ForeignKey('User', default=User.objects.filter(is_superuser=True).first().pk, on_delete=models.DO_NOTHING)
+    invitee = models.OneToOneField('User', related_name='own_invitation', blank=True, null=True, on_delete=models.DO_NOTHING)
+    email = models.EmailField(unique=True)
 
 
 # TODO: követések: User -> [Community, User, OtherEntity]

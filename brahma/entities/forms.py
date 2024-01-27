@@ -48,5 +48,5 @@ class UserProfileForm(BootstrapForm, ModelForm):
 class RegisterForm(UserCreationForm, BootstrapForm):
     class Meta:
         model = get_user_model()
-        fields = ("email", "username", )
+        fields = ("email", "username")
         field_classes = {"username": UsernameField}
