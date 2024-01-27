@@ -1,0 +1,28 @@
+{% load i18n %}
+<!doctype html>
+{% autoescape off %}
+{% blocktrans %}
+
+    Dear Recipient!<br><br>
+
+    This is a notification from the {{ site_name }} site. 
+    A person you might know (<b>{{ sender }}</b>) sent you an invitation to join the community.
+    If you would like to find out more about the portal, you can do it here:<br>
+
+{% endblocktrans %}
+
+
+{{ site_url }}<br><br>
+{% trans "To accept the invitation and become a member, please follow this link:" %}<br>
+{% if invitation_url %}
+    <a href="{{ invitation_url }}" target="_blank" rel="noopener noreferrer">{{ invitation_url }}</a>
+{% else %}
+    [...]
+{% endif %}
+
+{% blocktrans %}
+    <br><br>
+    With kind regards:<br>
+    The {{ site_name }} team
+{% endblocktrans %}
+{% endautoescape %}

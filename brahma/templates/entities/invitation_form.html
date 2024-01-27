@@ -1,0 +1,24 @@
+{% extends 'brahma/base.html' %}
+{% load i18n %}
+{% include "csrf_token" %}
+{% block title %}Meghívó küldése{% endblock title %}
+{% block content %}
+  <div class="h3 my-3">Meghívó küldése</div>
+  <div class="row">
+    <div class="col col-md-8 offset-md-2">
+      <form method="POST" class="form-bs5">
+        {% csrf_token %}
+        {{ form.as_div }}
+                
+        <div class="my-3">{% trans "By clicking 'Send' the system will send an email notification to the recipient with the below text" %}</div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-success mt-2">{% trans "Send" %}</button>
+        </div>
+      </form>
+      <div class="my-3 p-3 bg-light">{% include "email/invitation.html" with sender=request.user site_name="Komák.hu" site_url=request.get_host %}</div>
+      <div class="h5 my-2">{% trans "Previous invitations" %}:</div>
+      {% include "entities/invitations_include.html" with invs=request.user.invitation_set.all %}
+    </div>
+  </div>
+{% endblock %}
+
