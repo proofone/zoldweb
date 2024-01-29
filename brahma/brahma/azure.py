@@ -1,6 +1,7 @@
 import os
 
 
+SITE_TITLE = "Komák.hu"
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else []
