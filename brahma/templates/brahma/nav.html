@@ -48,7 +48,7 @@
                     <a class="nav-link" aria-current="page" href="{% url "logout" %}"><span class="">{% trans "Sign out" %}</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold" aria-current="page" href="{% url "profile" %}">{{ user.username }}</a>
+                    <a class="nav-link fw-semibold" aria-current="page" href="{% url "profile" %}">{{ request.user.username }}</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
