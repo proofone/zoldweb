@@ -5,8 +5,10 @@
 {% block content %}
 {% if "register" in request.path and request.user.is_authenticated %}
 <div class="mt-5 alert alert-danger">
-  {% trans "You are already signed in. If you would like to register an other user, please sign out first" %}
-  <a href="{% url "logout" %}" class="btn btn-secondary my-3">{% trans "Sign out" %}</a>
+  <div>
+    {% trans "You are already signed in. If you would like to register an other user, please sign out first" %}
+  </div>
+  <a href="{% url "logout" %}?next=/register/" class="btn btn-secondary my-3">{% trans "Sign out" %}</a>
 </div>
 {% else %}
   <div class="h3 my-3">

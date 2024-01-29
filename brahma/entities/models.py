@@ -63,7 +63,7 @@ class User(BaseEntity, AbstractUser):
     class Meta:
         verbose_name = _("User")
 
-    # email_verified = models.BooleanField(default=False)  # TODO: verification with random key
+    email = models.EmailField(_("email address"), blank=True, unique=True)
 
     def __str__(self) -> str:
         disp_name = self.username

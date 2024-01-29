@@ -2,7 +2,7 @@ import logging
 from typing import Any
 from urllib.parse import urlencode
 from django.conf import settings
-from django.http import HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.urls import reverse
@@ -32,16 +32,28 @@ class RegisterView(generic.CreateView):
         return initials
 
     def form_valid(self, form):
-        if 'inv_id' in form.cleaned_data:
+        if 'inv_id' in self.request.POST:
             try:
-                inv_obj = Invitation.objects.get(pk=form.cleaned_data['inv_id'])
-                form.instance.own_invitation = inv_obj  # TODO: invitation not saved!
+                inv_obj = Invitation.objects.get(pk=self.request.POST['inv_id'])
+                if inv_obj.invitee:
+                    logger.warning(f"Invitation with ID already used: {form.cleaned_data['inv_id']}")
+                    form.instance.is_active = False
+                    # TODO: inform user & ask confirmation / reject
+                    
+                else:
+                    self.object = form.instance.save()
+                    inv_obj.invitee = self.object
+                    inv_obj.save()
 
             except Invitation.DoesNotExist:
                 logger.warning(f"Nonexistent invitation ID: {form.cleaned_data['inv_id']}")
                 form.instance.is_active = False
+                # TODO: inform user
 
-        return super().form_valid(form)
+            if not self.object:
+                self.object = form.instance.save()
+
+        return HttpResponseRedirect(self.get_success_url())
         
 
 class ConfirmEmailView(generic.TemplateView):
@@ -58,18 +70,18 @@ class SendInvitationView(LoginRequiredMixin, generic.CreateView):
         self.object = form.save()
         email_context = {
             'sender': str(self.request.user),
-            'site_name': "Komák.hu",
+            'site_name': settings.SITE_TITLE,
             'site_url': self.request.get_host(),
-            'invitation_url': self.request.get_host() + reverse('register') + "?iid=" + str(self.object.pk) + "&ie=" + urlencode(self.object.email),
+            'invitation_url': self.request.get_host() + reverse('register') + "?" + urlencode((("iid", self.object.pk),("ie", self.object.email),)),
             }
         
-        send_mail(f"Meghívó - Komák.hu",
+        send_mail("Meghívó - " + settings.SITE_TITLE,
                   render_to_string("email/invitation.txt", email_context, self.request),
                   None,
                   [self.object.email],
                   html_message=render_to_string("email/invitation.html", email_context, self.request)) #TODO
         
-        return reverse("send-invitation")
+        return HttpResponseRedirect(reverse("send-invitation"))
 
 
 class CommunityCreateView(LoginRequiredMixin, generic.CreateView):
