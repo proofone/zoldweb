@@ -1,10 +1,8 @@
 {% extends 'brahma/base.html' %}
-{% load i18n %}
-{% block title %}teszt{% endblock title %}
-{% block content %}
-  <div class="col-12 m-0 fs-1 text-center">
-      Ökoközösségek és ökotudatos arcok találkozóhelye
-  </div>
+{% load i18n static %}
+{% block title %}Koma app oldal{% endblock title %}
+{% block extrascript %}
+<script defer src="{% static "runtime.bundle.js" %}"></script>
+<script defer src="{% static "main.bundle.js" %}"></script>
 
-{% endblock %}
-
+{% endblock extrascript %}
