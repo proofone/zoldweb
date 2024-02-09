@@ -11,9 +11,13 @@ def get_serialized_objects(request, model):
         'size': 10,
         'filter': {}
     }
-    for k in kwargs.keys():
-        if request.GET.get(k, None):
-            kwargs[k] = request.GET[k]
+    for k, v in request.GET.items():
+        if k in kwargs:
+            kwargs[k] = v
+        
+        # if kwarg contains name of a model field, add it as filter arg:
+        elif k in [f.name for f in model._meta.concrete_fields]:
+            kwargs['filter'].update({k: v})
             
     qs = model.objects.filter(**kwargs['filter']).order_by(kwargs['order'])
     retval = qs[kwargs['offset']:kwargs['offset']+kwargs['size']]
