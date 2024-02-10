@@ -22,7 +22,7 @@ def get_serialized_objects(request, model):
     qs = model.objects.filter(**kwargs['filter']).order_by(kwargs['order'])
     retval = qs[kwargs['offset']:kwargs['offset']+kwargs['size']]
     
-    return serialize('json', retval) 
+    return serialize('json', retval, fields=['username', 'email', 'hometown']) 
 
 
 @login_required
