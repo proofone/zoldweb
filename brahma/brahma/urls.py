@@ -44,7 +44,7 @@ urlpatterns = [
     re_path('app/*', TemplateView.as_view(template_name = "brahma/app.html"), name="appview"),
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
-    path('', IndexView.as_view())
+    path('', IndexView.as_view(), name="home")
 ]
 
 urlpatterns += [

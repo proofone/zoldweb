@@ -19,13 +19,24 @@
             "type": "node-terminal"
         },
         {
-            "name": "Python: Django",
+            "name": "Django Runserver",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/brahma/manage.py",
             "args": [
                 "runserver",
                 "38123"
+            ],
+            "django": true,
+            "justMyCode": false
+        },
+        {
+            "name": "Django Tests",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/brahma/manage.py",
+            "args": [
+                "test", "brahma", "entities"
             ],
             "django": true,
             "justMyCode": false
