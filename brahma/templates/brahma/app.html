@@ -2,7 +2,9 @@
 {% load i18n static %}
 {% block title %}Koma app oldal{% endblock title %}
 {% block extrascript %}
-<script defer src="{% static "runtime.bundle.js" %}"></script>
-<script defer src="{% static "main.bundle.js" %}"></script>
-
+    <script defer src="{% static "js/runtime.bundle.js" %}"></script>
+    <script defer src="{% static "js/main.bundle.js" %}"></script>
 {% endblock extrascript %}
+{% block content %}<noscript>
+    {% trans "You need to enable JavaScript to run this app." %}
+</noscript>{% endblock content %}

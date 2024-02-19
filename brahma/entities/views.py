@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from .forms import CommunityForm, RegisterForm, UserProfileForm
+from .forms import CommunityForm, RegisterForm, UserProfileForm, EntityForm
 from .models import User, Community, CommunityMembership, Location, OtherEntity, Invitation
 
 
@@ -25,14 +25,16 @@ class RegisterView(generic.CreateView):
     template_name = "entities/user_form.html"
     success_url = "/"
 
+    # TODO: def get() -> check invitation id w. regex + inv. obj
+    
     def get_initial(self) -> dict[str, Any]:
         initials = super().get_initial()
-        initials['email'] = self.request.GET.get('ie')
+        initials['email'] = self.request.GET.get('ie', "")
 
         return initials
 
     def form_valid(self, form):
-        if 'inv_id' in self.request.POST:
+        if self.request.POST.get('inv_id', None):
             try:
                 inv_obj = Invitation.objects.get(pk=self.request.POST['inv_id'])
                 if inv_obj.invitee:
@@ -41,7 +43,7 @@ class RegisterView(generic.CreateView):
                     # TODO: inform user & ask confirmation / reject
                     
                 else:
-                    self.object = form.instance.save()
+                    self.object = form.save()
                     inv_obj.invitee = self.object
                     inv_obj.save()
 
@@ -50,10 +52,10 @@ class RegisterView(generic.CreateView):
                 form.instance.is_active = False
                 # TODO: inform user
 
-            if not self.object:
-                self.object = form.instance.save()
+        if not self.object:
+            self.object = form.save()
 
-        return HttpResponseRedirect(self.get_success_url())
+        return HttpResponseRedirect(reverse('home'))
         
 
 class ConfirmEmailView(generic.TemplateView):
@@ -96,14 +98,13 @@ class CommunityCreateView(LoginRequiredMixin, generic.CreateView):
 
 
 class EntityCreateView(LoginRequiredMixin, generic.CreateView):
-    form_class = CommunityForm
+    form_class = EntityForm
     template_name = "entities/community_form.html"
 
     def get_success_url(self) -> str:
-        comm_obj = self.get_form().instance
-        CommunityMembership.objects.create(community=comm_obj, member=self.request.user, membership_type="admin")
+        ent_obj = self.get_form().instance
         
-        return reverse('community', args=[comm_obj.slug])
+        return reverse('otherentity', args=[ent_obj.slug])
         
 
 class CommunityListView(LoginRequiredMixin, generic.ListView):

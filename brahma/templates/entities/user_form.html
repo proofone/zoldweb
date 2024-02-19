@@ -1,18 +1,21 @@
 {% extends 'brahma/base.html' %}
 {% load i18n %}
 
+
 {% block title %}{% if "profile" in request.path %}Profil{% else %}Regisztráció{% endif %}{% endblock title %}
 {% block content %}
+{% url "password_change" as pw_change_url %}
 {% if "register" in request.path and request.user.is_authenticated %}
 <div class="mt-5 alert alert-danger">
   <div>
-    {% trans "You are already signed in. If you would like to register an other user, please sign out first" %}
+    {% trans "You are already signed in. If you would like to register another user, please sign out first" %}
   </div>
   <a href="{% url "logout" %}?next=/register/" class="btn btn-secondary my-3">{% trans "Sign out" %}</a>
 </div>
 {% else %}
   <div class="h3 my-3">
-    {% if "profile" in request.path %}Profil módosítása - {{ request.user }}{% else %}Regisztráció{% endif %}
+    {% if "profile" in request.path %}{% trans "Edit profile" %} - {{ request.user }}
+    {% else %}{% trans "Regisztráció" %}{% endif %}
   </div>
   <div class="row justify-content-center">
     <div class="col col-md-6">
@@ -26,7 +29,9 @@
           <input type="reset" class="btn btn-outline-warning ms-3" value={% trans "Reset" %}>
           <button onclick="history.back()" class="btn btn-outline-danger ms-3">{% trans "Cancel" %}</button>
         </div>
-        <div class="my-2">Jelszavad megváltoztatásához <a href="{% url "password_change" %}">kattints ide</a></div>
+        <div class="my-2">{% blocktrans %}
+          Change your password <a href="{{ pw_change_url }}">here</a>
+          {% endblocktrans %}</div>
         {% else %}
         </div>
         {% endif %}
