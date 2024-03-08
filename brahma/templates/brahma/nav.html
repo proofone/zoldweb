@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url "communities" %}">Közösségek</a>
+                    <a class="nav-link active" aria-current="page" href="{% url "communities" %}">{% trans "Communities" %}</a>
                 </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item">
@@ -45,17 +45,17 @@
                 </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url "logout" %}"><span class="">{% trans "Sign out" %}</span></a>
+                    <a class="nav-link" aria-current="page" href="{% url "logout" %}"><span class="">{% trans "Log out" %}</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link fw-semibold" aria-current="page" href="{% url "profile" %}">{{ request.user.username }}</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url "login" %}">Bejelentkezés</a>
+                    <a class="nav-link" aria-current="page" href="{% url "login" %}">{% trans "Log in" %}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url "register" %}">Regisztráció</a>
+                    <a class="nav-link active" aria-current="page" href="{% url "register" %}">{% trans "Register" %}</a>
                 </li>
                 {% endif %}
             </ul>
