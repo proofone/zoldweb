@@ -33,6 +33,7 @@ LOCATION_CAT_CHOICES = [
 
 OTHER_ENTITY_CAT_CHOICES = [
     ("org", _("Organization")),
+    ("comm_ent", _("Community Enterprise")),
     ("other", _("Other")),
 ]
 
