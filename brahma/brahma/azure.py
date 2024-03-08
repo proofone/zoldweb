@@ -6,6 +6,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else []
 CSRF_TRUSTED_ORIGINS = ['https://'+ os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else []
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 DATABASES = {
     'default': {
@@ -16,6 +18,7 @@ DATABASES = {
         'PASSWORD': os.environ['DBPASS'] 
     }
 }
+CONN_MAX_AGE = 120
 
 STATIC_URL = os.environ.get("DJANGO_STATIC_URL", "static/")
 STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
