@@ -26,6 +26,7 @@ class RegisterView(generic.CreateView):
     success_url = "/"
 
     # TODO: def get() -> check invitation id w. regex + inv. obj
+    # TODO: def get_success_url() -> if user is_active -> profile page else: message
     
     def get_initial(self) -> dict[str, Any]:
         initials = super().get_initial()

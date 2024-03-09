@@ -27,6 +27,9 @@
                 "runserver",
                 "38123"
             ],
+            "env": {
+                "DJANGO_SETTINGS_MODULE": "brahma.settings"
+            },
             "django": true,
             "justMyCode": false
         },

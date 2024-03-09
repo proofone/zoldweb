@@ -1,14 +1,14 @@
 {% load i18n %}
 <div class="hstack gap-2 flex-wrap">
-    {% for inv in invs %}
-    <div class="border p-2">
-      {% if inv.invitee %}
-        <a href="{% url "user" pk=inv.invitee.pk %}">{{ inv.invitee }}</a>
-      {% else %}
-        <span class="text-muted">{{ inv.email }}</span>
-      {% endif %}        
-    </div>
-    {% empty %}
-      <p class="text-muted">{% trans "You haven't sent any invitations yet" %}</p>
-    {% endfor %}
+  {% for inv in invs %}
+  <div class="border p-2">
+    {% if inv.invitee %}
+      <a href="{% url "user" pk=inv.invitee.pk %}">{{ inv.invitee }}</a>
+    {% else %}
+      <span class="text-muted">{{ inv.email }}</span>
+    {% endif %}        
   </div>
+  {% empty %}
+    <p class="text-muted">{% trans "You haven't sent any invitations yet" %}</p>
+  {% endfor %}
+</div>

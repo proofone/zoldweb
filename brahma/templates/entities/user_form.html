@@ -8,14 +8,14 @@
 {% if "register" in request.path and request.user.is_authenticated %}
 <div class="mt-5 alert alert-danger">
   <div>
-    {% trans "You are already signed in. If you would like to register another user, please sign out first" %}
+    {% trans "You are already logged in. If you would like to register another user, please log out first" %}
   </div>
   <a href="{% url "logout" %}?next=/register/" class="btn btn-secondary my-3">{% trans "Sign out" %}</a>
 </div>
 {% else %}
   <div class="h3 my-3">
     {% if "profile" in request.path %}{% trans "Edit profile" %} - {{ request.user }}
-    {% else %}{% trans "Regisztráció" %}{% endif %}
+    {% else %}{% trans "Register" %}{% endif %}
   </div>
   <div class="row justify-content-center">
     <div class="col col-md-6">

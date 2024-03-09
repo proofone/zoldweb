@@ -1,12 +1,12 @@
 {% extends 'brahma/base.html' %}
 {% load i18n %}
 {% include "csrf_token" %}
-{% block title %}Bejelentkezés{% endblock title %}
+{% block title %}{% trans "Log in" %}{% endblock title %}
 {% block content %}
-  <h1 class="h1 my-3">Bejelentkezés</h1>
+  <h1 class="h1 my-3">{% trans "Log in" %}</h1>
   {% if request.GET.next and request.GET.next != "/" %}
     <div class="fs-6 my-3">
-      A kért oldal csak regisztrált felhasználóink számára érhető el. Jelentkezzz be, vagy <a href="{% url "register" %}?next={{ request.GET.next }}">regisztrálj</a>.
+      {% trans "The requested page is only available to logged in users. Log in or " %} <a href="{% url "register" %}?next={{ request.GET.next }}">{% trans "register" %}</a>.
     </div>
   {% endif %}
   <div class="row justify-content-center">
@@ -14,7 +14,7 @@
       <form method="POST" class="form-bs5">
         {% csrf_token %}
         {{ form.as_div }}
-        <div class="my-2">Elfelejtetted a jelszavad? <a href="{% url "password_reset" %}">Itt tudsz újat kérni</a>.</div>
+        <div class="my-2">{% trans "Forgotten your password or username?" %} <a href="{% url "password_reset" %}">{% trans "Itt tudsz újat kérni" %}</a>.</div>
         <div class="text-center">
           <input type="submit" class="btn btn-outline-success mt-2" value={% trans "Submit" %}>
         </div>

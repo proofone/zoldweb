@@ -1,9 +1,9 @@
 {% extends 'brahma/base.html' %}
 {% load i18n %}
 {% include "csrf_token" %}
-{% block title %}Meghívó küldése{% endblock title %}
+{% block title %}{% trans "Send invitation" %}{% endblock title %}
 {% block content %}
-  <div class="h3 my-3">Meghívó küldése</div>
+  <div class="h3 my-3">{% trans "Send invitation" %}</div>
   <div class="row">
     <div class="col col-md-8 offset-md-2">
       <form method="POST" class="form-bs5">
