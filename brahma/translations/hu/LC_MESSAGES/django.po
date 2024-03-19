@@ -1,0 +1,337 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-14 00:22+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Translators: Ezek a tagsági formák nevei
+#: entities/models.py:13
+msgid "Supporter"
+msgstr ""
+
+#: entities/models.py:14
+msgid "Volunteer"
+msgstr ""
+
+#: entities/models.py:15
+msgid "Leader"
+msgstr ""
+
+#: entities/models.py:16
+msgid "Administrator"
+msgstr ""
+
+#. Translators: Ezek a közösségek lehetséges státuszai
+#: entities/models.py:21
+msgid "Initial"
+msgstr ""
+
+#: entities/models.py:22
+msgid "Open to new members"
+msgstr ""
+
+#: entities/models.py:23
+msgid "Temporarily closed"
+msgstr ""
+
+#: entities/models.py:24
+msgid "Closed"
+msgstr ""
+
+#: entities/models.py:25
+msgid "Ceased"
+msgstr ""
+
+#. Translators: Ezek a helyszínek kategória nevei
+#: entities/models.py:30
+msgid "Farm"
+msgstr ""
+
+#: entities/models.py:31
+msgid "Community garden"
+msgstr ""
+
+#: entities/models.py:32
+msgid "Community hub"
+msgstr ""
+
+#: entities/models.py:33
+msgid "Park"
+msgstr ""
+
+#: entities/models.py:34
+msgid "Public venue"
+msgstr ""
+
+#: entities/models.py:38
+msgid "Organization"
+msgstr ""
+
+#: entities/models.py:39 entities/models.py:113
+msgid "Community Enterprise"
+msgstr ""
+
+#: entities/models.py:40
+msgid "Other"
+msgstr ""
+
+#: entities/models.py:54
+msgid "Phone"
+msgstr ""
+
+#: entities/models.py:55
+msgid "Location of residency"
+msgstr ""
+
+#: entities/models.py:57
+msgid "Introduction"
+msgstr ""
+
+#: entities/models.py:68
+msgid "User"
+msgstr ""
+
+#: entities/models.py:70
+msgid "email address"
+msgstr ""
+
+#: entities/models.py:95
+msgid "Community"
+msgstr ""
+
+#: entities/models.py:100
+msgid "Date of foundation"
+msgstr ""
+
+# Közösségek szempontjából lényeges földrajzi helyek (közösségi terek, tanyák, stb.)
+#: entities/models.py:120
+msgid "Location"
+msgstr ""
+
+#: entities/models.py:122 entities/models.py:131
+msgid "Category"
+msgstr ""
+
+# Egyéb, közösségek szempontjából lényeges entitások (intézmények, portálok, vállalkozások, személyek, stb.)
+#: entities/models.py:129
+msgid "Other Entity"
+msgstr ""
+
+#: templates/brahma/app.html:9
+msgid "You need to enable JavaScript to run this app."
+msgstr ""
+
+#: templates/brahma/nav.html:14 templates/entities/community_list.html:3
+#: templates/entities/community_list.html:5
+msgid "Communities"
+msgstr ""
+
+#: templates/brahma/nav.html:48 templates/entities/user_form.html:13
+msgid "Log out"
+msgstr ""
+
+#: templates/brahma/nav.html:55 templates/registration/login.html:4
+#: templates/registration/login.html:6
+#: templates/registration/password_change_done.html:8
+msgid "Log in"
+msgstr ""
+
+#: templates/brahma/nav.html:58 templates/entities/user_form.html:18
+msgid "Register"
+msgstr ""
+
+#: templates/email/invitation.html:4
+#, python-format
+msgid ""
+"\n"
+"\n"
+"    Dear Recipient!<br><br>\n"
+"\n"
+"    This is a notification from the %(site_name)s site. \n"
+"    A person you might know (<b>%(sender)s</b>) sent you an invitation to "
+"join the community.\n"
+"    If you would like to find out more about the portal, you can do it here:"
+"<br>\n"
+"\n"
+msgstr ""
+
+#: templates/email/invitation.html:16
+msgid "To accept the invitation and become a member, please follow this link:"
+msgstr ""
+
+#: templates/email/invitation.html:23
+#, python-format
+msgid ""
+"\n"
+"    <br><br>\n"
+"    With kind regards:<br>\n"
+"    The %(site_name)s team\n"
+msgstr ""
+
+#: templates/email/invitation.txt:2
+#, python-format
+msgid ""
+"\n"
+"    Dear Recipient!\n"
+"\n"
+"    This is a notification from the %(site_name)s site. \n"
+"    A person you might know (%(sender)s) sent you an invitation to join the "
+"community.\n"
+"    If you would like to find out more about the portal, you can do it "
+"here:\n"
+"\n"
+msgstr ""
+
+#: templates/email/invitation.txt:11
+msgid ""
+"To accept the invitation and become a member, please follow this link:&#10;"
+msgstr ""
+
+#: templates/email/invitation.txt:14
+#, python-format
+msgid ""
+"\n"
+"    \n"
+"\n"
+"    With kind regards:\n"
+"    The %(site_name)s team\n"
+msgstr ""
+
+#: templates/entities/community_detail.html:7
+#: templates/entities/user_detail.html:7
+msgid "Message"
+msgstr ""
+
+#: templates/entities/community_detail.html:8
+msgid "Members"
+msgstr ""
+
+#: templates/entities/community_detail.html:15
+msgid "No members at the moment"
+msgstr ""
+
+#: templates/entities/community_form.html:13
+#: templates/entities/user_form.html:27 templates/registration/login.html:19
+#: templates/registration/password_change_form.html:13
+msgid "Submit"
+msgstr ""
+
+#: templates/entities/community_list.html:7
+msgid "Create"
+msgstr ""
+
+#: templates/entities/community_list.html:15
+msgid "No items to show"
+msgstr ""
+
+#: templates/entities/invitation_form.html:4
+#: templates/entities/invitation_form.html:6
+msgid "Send invitation"
+msgstr ""
+
+#: templates/entities/invitation_form.html:13
+msgid ""
+"By clicking 'Send' the system will send an email notification to the "
+"recipient with the below text"
+msgstr ""
+
+#: templates/entities/invitation_form.html:15
+msgid "Send"
+msgstr ""
+
+#: templates/entities/invitation_form.html:19
+msgid "Previous invitations"
+msgstr ""
+
+#: templates/entities/invitations_include.html:12
+msgid "You haven't sent any invitations yet"
+msgstr ""
+
+#: templates/entities/user_form.html:11
+msgid ""
+"You are already logged in. If you would like to register another user, "
+"please log out first"
+msgstr ""
+
+#: templates/entities/user_form.html:17
+msgid "Edit profile"
+msgstr ""
+
+#: templates/entities/user_form.html:29
+msgid "Reset"
+msgstr ""
+
+#: templates/entities/user_form.html:30
+msgid "Cancel"
+msgstr ""
+
+#: templates/entities/user_form.html:32
+#, python-format
+msgid ""
+"\n"
+"          Change your password <a href=\"%(pw_change_url)s\">here</a>\n"
+"          "
+msgstr ""
+
+#: templates/entities/user_list.html:12
+msgid "No users at the moment"
+msgstr ""
+
+#: templates/registration/login.html:9
+msgid "The requested page is only available to logged in users. Log in or "
+msgstr ""
+
+#: templates/registration/login.html:9
+msgid "register"
+msgstr ""
+
+#: templates/registration/login.html:17
+msgid "Forgotten your password or username?"
+msgstr ""
+
+#: templates/registration/login.html:17
+msgid "You can set a new one here."
+msgstr ""
+
+#: templates/registration/password_change_done.html:4
+#: templates/registration/password_change_done.html:6
+msgid "Password change successful"
+msgstr ""
+
+#: templates/registration/password_change_done.html:8
+msgid "You can log in with your new password now."
+msgstr ""
+
+#: templates/registration/password_change_form.html:4
+#: templates/registration/password_change_form.html:6
+msgid "Change password"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:4
+#: templates/registration/password_reset_form.html:6
+msgid "Password reset"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:11
+msgid ""
+"Forgotten your password? Enter your email address below, and we’ll email "
+"instructions for setting a new one."
+msgstr ""
+
+#: templates/registration/password_reset_form.html:14
+msgid "Reset password"
+msgstr ""
