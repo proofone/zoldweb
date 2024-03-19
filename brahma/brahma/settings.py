@@ -105,9 +105,9 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'CET'
 
 USE_I18N = True
-
 USE_TZ = True
 
+LOCALE_PATHS = [BASE_DIR / "translations",]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
