@@ -9,6 +9,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 MEMBERSHIP_CHOICES = [
+    # Translators: Ezek a tagsági formák nevei
     ("sup", _("Supporter")),
     ("vol", _("Volunteer")),
     ("lead", _("Leader")),
@@ -16,6 +17,7 @@ MEMBERSHIP_CHOICES = [
 ]
 
 COMM_STATUS_CHOICES = [
+    # Translators: Ezek a közösségek lehetséges státuszai
     ("init", _("Initial")),
     ("open", _("Open to new members")),
     ("closed_temp", _("Temporarily closed")),
@@ -24,6 +26,7 @@ COMM_STATUS_CHOICES = [
 ]
 
 LOCATION_CAT_CHOICES = [
+    # Translators: Ezek a helyszínek kategória nevei
     ("farm", _("Farm")),
     ("commgard", _("Community garden")),
     ("commhub", _("Community hub")),
@@ -48,10 +51,10 @@ class BaseEntity(models.Model):
         abstract = True
 
     name = models.CharField(max_length=50)
-    phone = models.CharField(blank=True, max_length=15)  # TODO: regexvalidator
-    hometown = models.CharField(blank=True, max_length=255, verbose_name=_("Tartózkodási hely"))
+    phone = models.CharField(_("Phone"), blank=True, max_length=15)  # TODO: regexvalidator
+    hometown = models.CharField(_("Location of residency"), blank=True, max_length=255)
     avatar_photo = models.ImageField(blank=True)
-    intro = models.CharField(blank=True, max_length=512)
+    intro = models.CharField(_("Introduction"), blank=True, max_length=512)
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
@@ -94,7 +97,7 @@ class Community(BaseEntity):
     slug = models.SlugField(unique=True)
     location = models.CharField(blank=True, max_length=255)  # TODO: geodjango geometryfield?
     members = models.ManyToManyField('User', through='CommunityMembership')
-    founded = models.DateField(default=date.today)
+    founded = models.DateField(_("Date of foundation"), default=date.today)
     status = models.CharField(choices=COMM_STATUS_CHOICES, default="init", max_length=64)  # TODO
 
     def get_absolute_url(self):
@@ -116,7 +119,7 @@ class Location(BaseEntity):
     class Meta:
         verbose_name = _("Location")
 
-    category = models.CharField(choices=LOCATION_CAT_CHOICES, max_length=255)  # TODO
+    category = models.CharField(_("Category"), choices=LOCATION_CAT_CHOICES, max_length=255)  # TODO
     location = None  # TODO: geodjango geometryfield?
 
 
@@ -125,7 +128,7 @@ class OtherEntity(BaseEntity):
     class Meta:
         verbose_name = _("Other Entity")
 
-    category = models.CharField(choices=OTHER_ENTITY_CAT_CHOICES, max_length=64)  # TODO
+    category = models.CharField(_("Category"), choices=OTHER_ENTITY_CAT_CHOICES, max_length=64)  # TODO
     admins = models.ManyToManyField('User')
 
 

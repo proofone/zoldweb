@@ -14,7 +14,7 @@
       <form method="POST" class="form-bs5">
         {% csrf_token %}
         {{ form.as_div }}
-        <div class="my-2">{% trans "Forgotten your password or username?" %} <a href="{% url "password_reset" %}">{% trans "Itt tudsz újat kérni" %}</a>.</div>
+        <div class="my-2">{% trans "Forgotten your password or username?" %} <a href="{% url "password_reset" %}">{% trans "You can set a new one here." %}</a>.</div>
         <div class="text-center">
           <input type="submit" class="btn btn-outline-success mt-2" value={% trans "Submit" %}>
         </div>

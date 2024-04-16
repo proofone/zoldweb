@@ -2,6 +2,7 @@ import logging
 from typing import Any
 from urllib.parse import urlencode
 from django.conf import settings
+from django.db import models
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
@@ -134,13 +135,14 @@ class UserDetailView(LoginRequiredMixin, generic.DetailView):
     model = User
 
 
-class ProfileView(LoginRequiredMixin, generic.FormView):
-    def get_form_kwargs(self) -> dict[str, Any]:
-        return {'instance': self.request.user}
-
+class ProfileView(LoginRequiredMixin, generic.UpdateView):
+    def get_object(self) -> models.Model:
+        return self.request.user # type: ignore - logged in user is never Anonymous
+    
+    model = User
     form_class = UserProfileForm
     template_name = "entities/user_form.html"
-    success_url = "/"
+    # success_url = "/"
 
 
 class CommunityUpdateView(LoginRequiredMixin, generic.UpdateView):

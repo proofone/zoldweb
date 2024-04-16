@@ -4,7 +4,7 @@
 {% block content %}
   <h1 class="h1 mb-3">{% trans "Communities" %}</h1>
   {% if user.is_authenticated %}
-    <a href="{% url "create-community" %}" class="btn btn-outline-primary">{% trans "Létrehozás" %}</a>
+    <a href="{% url "create-community" %}" class="btn btn-outline-primary">{% trans "Create" %}</a>
   {% endif %}
   <ul class="list-group my-2">
     {% for obj in object_list %}
