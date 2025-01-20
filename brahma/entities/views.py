@@ -52,7 +52,8 @@ class RegisterView(generic.CreateView):
             except Invitation.DoesNotExist:
                 logger.warning(f"Nonexistent invitation ID: {form.cleaned_data['inv_id']}")
                 form.instance.is_active = False
-                # TODO: inform user
+                
+                # TODO: form.add_error() + inform user
 
         if not self.object:
             self.object = form.save()
