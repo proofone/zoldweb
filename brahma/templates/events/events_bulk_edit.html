@@ -1,0 +1,25 @@
+{% extends 'brahma/base.html' %}
+{% load i18n %}
+
+
+{% block title %}Programok | Gyüttment 2025{% endblock title %}
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col col-md-8">
+      {{ form }}
+      <form method="POST" class="">
+        {% csrf_token %}
+        <input type="hidden" name="inv_id" value="{{ request.GET.iid }}">
+        {{ formset }}
+        <div class="btn-group-sm d-flex justify-content-between mt-2">
+          <input type="submit" class="btn btn-outline-success flex-grow-1" value={% trans "Submit" %}>
+          <input type="reset" class="btn btn-outline-warning ms-3" value={% trans "Reset" %}>
+          <button onclick="history.back()" class="btn btn-outline-danger ms-3">{% trans "Cancel" %}</button>
+        </div>
+      </form>
+      
+    </div>
+
+  </div>
+{% endblock %}
+
