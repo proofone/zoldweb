@@ -20,7 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
 
-from brahma.events.views import EventsBulkEditView
+from events.views import EventsBulkEditView
 from entities.views import EntityCreateView, IndexView, RegisterView, CommunityListView, \
     UserListView, EntityListView, EntityDetailView, CommunityCreateView, UserDetailView, \
     CommunityDetailView, ConfirmEmailView, ProfileView, SendInvitationView

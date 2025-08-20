@@ -11,9 +11,8 @@ from .models import EventSession
 EventsFormSet = modelformset_factory(
     EventSession,
     fields = ["name", "holder", "cam_operator"]
-    ),
+    )
     
-
 
 class EventsBulkEditView(generic.FormView):
     formset = EventsFormSet()
