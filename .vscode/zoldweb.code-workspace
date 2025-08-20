@@ -8,6 +8,7 @@
 		}
 	],
 	"settings": {
-		"files.autoSave": "afterDelay"
+		"files.autoSave": "afterDelay",
+		"python.defaultInterpreterPath": "python"
 	}
 }

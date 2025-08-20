@@ -1,8 +1,11 @@
-{% load i18n %}
+{% load i18n static %}
 <div>
 <nav class="navbar navbar-expand-md sticky-top bg-body-secondary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Komaháló<span class="badge bg-warning mx-1">demo</span></a>
+        <a class="navbar-brand" href="/">
+            <img src="{% static "gyuttment-logo-vilagos-107x60.png" %}" />
+            {% comment %} <span class="badge small bg-warning mx-1">programok</span> {% endcomment %}
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation" tooltip="Toggle navigation">
@@ -11,8 +14,9 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url "communities" %}">{% trans "Communities" %}</a>
+                    <a class="nav-link active" aria-current="page" href="{% url "sessions" %}">{% trans "Sessions" %}</a>
                 </li>
+                {% comment %}
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{% url "users" %}">Komák</a>
@@ -43,6 +47,7 @@
                         <button class="btn btn-outline-primary" type="submit">Send</button>
                     </form>
                 </li>
+                {% endcomment %}
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{% url "logout" %}"><span class="">{% trans "Log out" %}</span></a>

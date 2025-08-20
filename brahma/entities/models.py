@@ -120,6 +120,7 @@ class Location(BaseEntity):
         verbose_name = _("Location")
 
     category = models.CharField(_("Category"), choices=LOCATION_CAT_CHOICES, max_length=255)  # TODO
+    host = models.ForeignKey(User, verbose_name=_("Host"), on_delete=models.SET_NULL, null=True)
     location = None  # TODO: geodjango geometryfield?
 
 

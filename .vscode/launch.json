@@ -22,6 +22,7 @@
             "name": "Django Runserver",
             "type": "python",
             "request": "launch",
+            "python": "${command:python.interpreterPath}",
             "program": "${workspaceFolder}/brahma/manage.py",
             "args": [
                 "runserver",
@@ -31,7 +32,7 @@
                 "DJANGO_SETTINGS_MODULE": "brahma.settings"
             },
             "django": true,
-            "justMyCode": false
+            "justMyCode": false,
         },
         {
             "name": "Django Tests",

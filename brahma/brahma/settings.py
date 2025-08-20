@@ -18,6 +18,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'events',
     'entities.apps.EntitiesConfig',
     'django.contrib.admindocs',
     'django.contrib.admin',
