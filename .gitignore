@@ -6,6 +6,7 @@ __pycache__/
 *$py.class
 t.t
 data/
+public/
 
 # C extensions
 *.so
