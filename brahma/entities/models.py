@@ -93,6 +93,7 @@ class Community(BaseEntity):
     """Közösségek..."""
     class Meta:
         verbose_name = _("Community")
+        verbose_name_plural = _("Communities")
 
     slug = models.SlugField(unique=True)
     location = models.CharField(blank=True, max_length=255)  # TODO: geodjango geometryfield?
@@ -118,6 +119,7 @@ class Location(BaseEntity):
     """Közösségek szempontjából lényeges földrajzi helyek (közösségi terek, tanyák, stb.)"""
     class Meta:
         verbose_name = _("Location")
+        verbose_name_plural = _("Locations")
 
     category = models.CharField(_("Category"), choices=LOCATION_CAT_CHOICES, max_length=255)  # TODO
     location = None  # TODO: geodjango geometryfield?
@@ -127,14 +129,19 @@ class OtherEntity(BaseEntity):
     """Egyéb, közösségek szempontjából lényeges entitások (intézmények, portálok, vállalkozások, személyek, stb.)"""
     class Meta:
         verbose_name = _("Other Entity")
+        verbose_name_plural = _("Other Entities")
 
     category = models.CharField(_("Category"), choices=OTHER_ENTITY_CAT_CHOICES, max_length=64)  # TODO
     admins = models.ManyToManyField('User')
 
 
 class Invitation(models.Model):
+    class Meta:
+        verbose_name = _("Invitation")
+        verbose_name_plural = _("Invitations")
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    sender = models.ForeignKey('User', default=User.objects.filter(is_superuser=True).first().pk, on_delete=models.DO_NOTHING)
+    sender = models.ForeignKey('User', default=None, on_delete=models.DO_NOTHING)
     invitee = models.OneToOneField('User', related_name='own_invitation', blank=True, null=True, on_delete=models.DO_NOTHING)
     email = models.EmailField(unique=True)
 
