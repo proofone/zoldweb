@@ -121,6 +121,10 @@ STATICFILES_DIRS = [BASE_DIR / '../public']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Brahma settings
+REGISTRATION_OPEN = False
+INVITATION_OPEN = False
+
 
 if 'WEBSITE_HOSTNAME' in os.environ: # Running on Azure
     from .azure import *
