@@ -45,7 +45,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR / 'templates',
-                # django.__path__[0] + "/forms/templates",
+                django.__path__[0] + "/forms/templates",
                 ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -57,12 +57,12 @@ TEMPLATES = [
             ],
         },
     },
-]  # TODO: unite templates dir with ExpressJS
+]
 
 WSGI_APPLICATION = 'brahma.wsgi.application'
 
 # Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -75,7 +75,7 @@ DATABASES = {
 AUTH_USER_MODEL = 'entities.User'
 
 # Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
+# https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -98,7 +98,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
+# https://docs.djangoproject.com/en/6.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -110,14 +110,14 @@ USE_TZ = True
 LOCALE_PATHS = [BASE_DIR / "translations",]
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
+# https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.environ.get("DJANGO_STATIC_ROOT", BASE_DIR / 'static')
 STATICFILES_DIRS = [BASE_DIR / '../public']
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+# https://docs.djangoproject.com/en/6.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
