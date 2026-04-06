@@ -1,0 +1,3 @@
+[submodule "tenshi"]
+	path = tenshi
+	url = https://github.com/proofone/tenshi.git

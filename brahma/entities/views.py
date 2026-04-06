@@ -5,6 +5,7 @@ from django.conf import settings
 from django.db import models
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.core.mail import send_mail
+from django.utils.translation import gettext_lazy as _
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.views import generic
@@ -26,7 +27,6 @@ class RegisterView(generic.CreateView):
     template_name = "entities/user_form.html"
     success_url = "/"
 
-    # TODO: def get() -> check invitation id w. regex + inv. obj
     # TODO: def get_success_url() -> if user is_active -> profile page else: message
     
     def get_initial(self) -> dict[str, Any]:
@@ -40,9 +40,10 @@ class RegisterView(generic.CreateView):
             try:
                 inv_obj = Invitation.objects.get(pk=self.request.POST['inv_id'])
                 if inv_obj.invitee:
-                    logger.warning(f"Invitation with ID already used: {form.cleaned_data['inv_id']}")
+                    err_msg = f"Invitation with ID already used: {form.cleaned_data['inv_id']}"
+                    logger.warning(err_msg)
                     form.instance.is_active = False
-                    # TODO: inform user & ask confirmation / reject
+                    form.add_error(None, _(err_msg))
                     
                 else:
                     self.object = form.save()
@@ -50,9 +51,10 @@ class RegisterView(generic.CreateView):
                     inv_obj.save()
 
             except Invitation.DoesNotExist:
-                logger.warning(f"Nonexistent invitation ID: {form.cleaned_data['inv_id']}")
+                err_msg = f"Nonexistent invitation ID: {form.cleaned_data['inv_id']}"
+                logger.warning(err_msg)
                 form.instance.is_active = False
-                # TODO: inform user
+                form.add_error(None, _(err_msg))
 
         if not self.object:
             self.object = form.save()
@@ -67,7 +69,7 @@ class ConfirmEmailView(generic.TemplateView):
 class SendInvitationView(LoginRequiredMixin, generic.CreateView):
     model = Invitation
     fields = ["email"]
-    success_url = "/" # reverse('profile')
+    # success_url = reverse('profile')
 
     def form_valid(self, form):
         form.instance.sender = self.request.user

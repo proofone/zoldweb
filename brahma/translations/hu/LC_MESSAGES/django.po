@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-14 00:22+0100\n"
+"POT-Creation-Date: 2026-04-06 17:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,7 @@ msgstr ""
 #. Translators: Ezek a közösségek lehetséges státuszai
 #: entities/models.py:21
 msgid "Initial"
-msgstr ""
+msgstr "Alakulóban"
 
 #: entities/models.py:22
 msgid "Open to new members"
@@ -46,15 +46,15 @@ msgstr ""
 
 #: entities/models.py:23
 msgid "Temporarily closed"
-msgstr ""
+msgstr "Átmenetileg nem fogad tagokat"
 
 #: entities/models.py:24
 msgid "Closed"
-msgstr ""
+msgstr "Zárt"
 
 #: entities/models.py:25
 msgid "Ceased"
-msgstr ""
+msgstr "Megszűnt"
 
 #. Translators: Ezek a helyszínek kategória nevei
 #: entities/models.py:30
@@ -79,27 +79,27 @@ msgstr ""
 
 #: entities/models.py:38
 msgid "Organization"
-msgstr ""
+msgstr "Szervezet"
 
-#: entities/models.py:39 entities/models.py:113
+#: entities/models.py:39 entities/models.py:114
 msgid "Community Enterprise"
-msgstr ""
+msgstr "Közösségi vállalkozás"
 
 #: entities/models.py:40
 msgid "Other"
-msgstr ""
+msgstr "Egyéb"
 
 #: entities/models.py:54
 msgid "Phone"
-msgstr ""
+msgstr "Telefon"
 
 #: entities/models.py:55
 msgid "Location of residency"
-msgstr ""
+msgstr "Tartózkodási hely"
 
 #: entities/models.py:57
 msgid "Introduction"
-msgstr ""
+msgstr "Bemutatkozás"
 
 #: entities/models.py:68
 msgid "User"
@@ -107,40 +107,69 @@ msgstr ""
 
 #: entities/models.py:70
 msgid "email address"
-msgstr ""
+msgstr "Email cím"
 
 #: entities/models.py:95
 msgid "Community"
-msgstr ""
+msgstr "Közösség"
 
-#: entities/models.py:100
+#: entities/models.py:96 templates/brahma/nav.html:14
+#: templates/entities/community_list.html:3
+#: templates/entities/community_list.html:5
+msgid "Communities"
+msgstr "Közösségek"
+
+#: entities/models.py:101
 msgid "Date of foundation"
-msgstr ""
+msgstr "Alapítás éve"
 
 # Közösségek szempontjából lényeges földrajzi helyek (közösségi terek, tanyák, stb.)
-#: entities/models.py:120
+#: entities/models.py:121
 msgid "Location"
-msgstr ""
+msgstr "Helyszín"
 
-#: entities/models.py:122 entities/models.py:131
+# Közösségek szempontjából lényeges földrajzi helyek (közösségi terek, tanyák, stb.)
+#: entities/models.py:122
+msgid "Locations"
+msgstr "Helyszínek"
+
+#: entities/models.py:124 entities/models.py:134
 msgid "Category"
-msgstr ""
+msgstr "Kategória"
 
 # Egyéb, közösségek szempontjából lényeges entitások (intézmények, portálok, vállalkozások, személyek, stb.)
-#: entities/models.py:129
+#: entities/models.py:131
 msgid "Other Entity"
-msgstr ""
+msgstr "Egyéb entitás"
+
+# Egyéb, közösségek szempontjából lényeges entitások (intézmények, portálok, vállalkozások, személyek, stb.)
+#: entities/models.py:132
+#, fuzzy
+#| msgid "Other Entity"
+msgid "Other Entities"
+msgstr "Egyéb entitások"
+
+#: entities/models.py:140
+#, fuzzy
+#| msgid "Organization"
+msgid "Invitation"
+msgstr "Meghívó"
+
+#: entities/models.py:141
+#, fuzzy
+#| msgid "Organization"
+msgid "Invitations"
+msgstr "Meghívók"
 
 #: templates/brahma/app.html:9
 msgid "You need to enable JavaScript to run this app."
 msgstr ""
 
-#: templates/brahma/nav.html:14 templates/entities/community_list.html:3
-#: templates/entities/community_list.html:5
-msgid "Communities"
+#: templates/brahma/index.html:4
+msgid "Főoldal"
 msgstr ""
 
-#: templates/brahma/nav.html:48 templates/entities/user_form.html:13
+#: templates/brahma/nav.html:48 templates/entities/user_form.html:20
 msgid "Log out"
 msgstr ""
 
@@ -150,9 +179,10 @@ msgstr ""
 msgid "Log in"
 msgstr ""
 
-#: templates/brahma/nav.html:58 templates/entities/user_form.html:18
+#: templates/brahma/nav.html:58 templates/entities/user_form.html:7
+#: templates/entities/user_form.html:26
 msgid "Register"
-msgstr ""
+msgstr "Regisztráció"
 
 #: templates/email/invitation.html:4
 #, python-format
@@ -214,18 +244,18 @@ msgstr ""
 #: templates/entities/community_detail.html:7
 #: templates/entities/user_detail.html:7
 msgid "Message"
-msgstr ""
+msgstr "Üzenet"
 
 #: templates/entities/community_detail.html:8
 msgid "Members"
-msgstr ""
+msgstr "Tagok"
 
 #: templates/entities/community_detail.html:15
 msgid "No members at the moment"
-msgstr ""
+msgstr "Jelenleg nincsenek megjeleníthető tagok"
 
 #: templates/entities/community_form.html:13
-#: templates/entities/user_form.html:27 templates/registration/login.html:19
+#: templates/entities/user_form.html:35 templates/registration/login.html:19
 #: templates/registration/password_change_form.html:13
 msgid "Submit"
 msgstr ""
@@ -236,7 +266,7 @@ msgstr ""
 
 #: templates/entities/community_list.html:15
 msgid "No items to show"
-msgstr ""
+msgstr "Nincsenek megjeleníthető elemek"
 
 #: templates/entities/invitation_form.html:4
 #: templates/entities/invitation_form.html:6
@@ -261,30 +291,36 @@ msgstr ""
 msgid "You haven't sent any invitations yet"
 msgstr ""
 
-#: templates/entities/user_form.html:11
+#: templates/entities/user_form.html:6
+msgid "Profile"
+msgstr "Profil"
+
+#: templates/entities/user_form.html:18
 msgid ""
 "You are already logged in. If you would like to register another user, "
 "please log out first"
 msgstr ""
 
-#: templates/entities/user_form.html:17
+#: templates/entities/user_form.html:25
 msgid "Edit profile"
 msgstr ""
 
-#: templates/entities/user_form.html:29
+#: templates/entities/user_form.html:37
 msgid "Reset"
 msgstr ""
 
-#: templates/entities/user_form.html:30
+#: templates/entities/user_form.html:38
 msgid "Cancel"
 msgstr ""
 
-#: templates/entities/user_form.html:32
+#: templates/entities/user_form.html:41
 #, python-format
-msgid ""
-"\n"
-"          Change your password <a href=\"%(pw_change_url)s\">here</a>\n"
-"          "
+msgid "Change your password <a href=\"%(pw_change_url)s\">here</a>"
+msgstr "Jelszavad megváltoztatásához kattints <a href=\"%(pw_change_url)s\">ide</a>"
+
+#: templates/entities/user_form.html:44
+#, python-format
+msgid "Meghívó küldéséhez kattints <a href=\"%(send_inv_url)s\">ide</a>"
 msgstr ""
 
 #: templates/entities/user_list.html:12
@@ -335,3 +371,8 @@ msgstr ""
 #: templates/registration/password_reset_form.html:14
 msgid "Reset password"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Register"
+#~ msgid "Regisztráció"
+#~ msgstr "Regisztráció"

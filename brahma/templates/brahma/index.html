@@ -1,18 +1,42 @@
 {% extends 'brahma/base.html' %}
-{% load i18n %}
-{% block title %}Főoldal{% endblock title %}
+{% load i18n static %}
+
+{% block title %}{% trans "Főoldal" %}{%endblock title %}
+
+{% block extrascript %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="{% static "leaflet_setup.js" %}"></script>
+{% endblock extrascript %}
+
 {% block content %}
-  <div class="col-12 m-0 fs-1 text-center">
-      Ökoközösségek és ökotudatos arcok találkozóhelye
+<div class="col-12 m-0 fs-1 text-center">
+  Ökoközösségek és ökotudatos arcok találkozóhelye
+</div>
+<div class="col-12">
+  <div class="h4 my-3">Közösségek</div>
+  <div
+    class="text-center text-muted"
+    id="map-container"
+    style="
+      min-height: 50vh;
+      background-image: linear-gradient(white 15%, rgba(55, 55, 15, 0.3));
+    "
+  >
+    <span>[Térkép helye]</span>
+    {% comment %}
+    
+    {% endcomment %}
   </div>
-  <div class="col-12">
-      <div class="h5 my-3">Közösségek</div>
-      <div class="text-center text-muted" id="map-container" 
-        style="min-height: 50vh; background-image: linear-gradient(white 15%, rgba(55,55,15,0.3));">
-          <span>[Térkép helye]</span>
-          {% comment %} <iframe src="https://www.google.com/maps/d/embed?mid=1Rws27ynW6UFELCxaL3MqvK8cIA6wt1sO&ehbc=2E312F"></iframe> {% endcomment %}
-      </div>
+
+  {% if display_komahalo_gmap %}
+  <div class="h4 mt-5 mb-3">Új Koma Háló térkép</div>
+  <div class="col-12" id="komahalo-gmap-container">
+    <iframe class="" style="width: 100%; min-height: 50vh"
+      src="https://www.google.com/maps/d/embed?mid=1Rws27ynW6UFELCxaL3MqvK8cIA6wt1sO&ehbc=2E312F"
+    ></iframe>
   </div>
+  {% endif %}
+</div>
 
 {% endblock %}
-
