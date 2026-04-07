@@ -50,10 +50,10 @@ class BaseEntity(models.Model):
     class Meta:
         abstract = True
 
-    name = models.CharField(max_length=50)
+    name = models.CharField(_("Nickname"), max_length=50)
     phone = models.CharField(_("Phone"), blank=True, max_length=15)  # TODO: regexvalidator
     hometown = models.CharField(_("Location of residency"), blank=True, max_length=255)
-    avatar_photo = models.ImageField(blank=True)
+    avatar_photo = models.ImageField(_("Profile picture"), blank=True)
     intro = models.CharField(_("Introduction"), blank=True, max_length=512)
     created_date = models.DateTimeField(auto_now_add=True)
 
@@ -66,6 +66,7 @@ class User(BaseEntity, AbstractUser):
     """A rendszert használó összes természetes személy (tartalmazza a hozzáférést is)"""
     class Meta:
         verbose_name = _("User")
+        verbose_name_plural = _("Users")
 
     email = models.EmailField(_("email address"), blank=True, unique=True)
 
@@ -75,6 +76,8 @@ class User(BaseEntity, AbstractUser):
         if self.first_name and self.last_name:
             disp_name = f"{self.last_name} {self.first_name}"  # TODO: int'l names
             if self.name: disp_name += f" ({self.name})"
+        elif self.name:
+            disp_name = self.name
         
         return disp_name
 
@@ -95,7 +98,7 @@ class Community(BaseEntity):
         verbose_name = _("Community")
         verbose_name_plural = _("Communities")
 
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(_("Web identifier"), unique=True)
     location = models.CharField(blank=True, max_length=255)  # TODO: geodjango geometryfield?
     members = models.ManyToManyField('User', through='CommunityMembership')
     founded = models.DateField(_("Date of foundation"), default=date.today)
@@ -103,6 +106,9 @@ class Community(BaseEntity):
 
     def get_absolute_url(self):
         return reverse("community", kwargs={"slug": self.slug})
+    
+    def get_admins(self):
+        return CommunityMembership.objects.filter(community=self, membership_type="admin")
     
     def get_memberships(self):
         return CommunityMembership.objects.filter(community=self)
