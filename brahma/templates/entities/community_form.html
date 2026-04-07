@@ -1,21 +1,35 @@
 {% extends 'brahma/base.html' %}
 {% load i18n %}
 {% include "csrf_token" %}
-{% block title %}Közösség regisztráció{% endblock title %}
+{% block title %}
+  {% if object %}
+    {% trans "Community" %}&nbsp{% trans "Editing" %}
+  {% else %}
+    {% trans "Community" %}&nbsp{% trans "Registration" %}
+  {% endif %}
+{% endblock title %}
+
+{% block page_header %}
+  {% if object %}
+    {{ object.name }}&nbsp({% trans "Editing" %})
+  {% else %}
+    {% trans "Community" %}&nbsp{% trans "Registration" %}
+  {% endif %}
+{% endblock page_header %}
+
 {% block content %}
-  <h1 class="h1 my-3">Közösség regisztráció</h1>
-  <div class="row justify-content-center">
-    <div class="col col-md-8">
-      <form method="POST" class="form-floating">
-        {% csrf_token %}
-        {{ form }}
-        <div class="text-center">
-          <input type="submit" class="btn btn-outline-success mt-2" value={% trans "Submit" %}>
-        </div>
-      </form>
-      
-    </div>
+<div class="row justify-content-center">
+  <div class="col col-md-8">
+    <form method="POST" class="form-floating">
+      {% csrf_token %}
+      {{ form }}
+      <div class="text-center">
+        <input type="submit" class="btn btn-outline-success mt-2" value={% trans "Submit" %}>
+      </div>
+    </form>
+ {% comment %} #TODO: check if user is admin and dont display form if not {% endcomment %}
   </div>
+</div>
 
 {% endblock %}
 

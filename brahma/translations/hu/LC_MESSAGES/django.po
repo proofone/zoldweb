@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-06 17:15+0200\n"
+"POT-Creation-Date: 2026-04-07 23:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,19 +21,19 @@ msgstr ""
 #. Translators: Ezek a tagsági formák nevei
 #: entities/models.py:13
 msgid "Supporter"
-msgstr ""
+msgstr "Szimpatizáns"
 
 #: entities/models.py:14
 msgid "Volunteer"
-msgstr ""
+msgstr "Önkéntes"
 
 #: entities/models.py:15
 msgid "Leader"
-msgstr ""
+msgstr "Vezető"
 
 #: entities/models.py:16
 msgid "Administrator"
-msgstr ""
+msgstr "Adminisztrátor"
 
 #. Translators: Ezek a közösségek lehetséges státuszai
 #: entities/models.py:21
@@ -42,7 +42,7 @@ msgstr "Alakulóban"
 
 #: entities/models.py:22
 msgid "Open to new members"
-msgstr ""
+msgstr "Nyitott új csatlakozókra"
 
 #: entities/models.py:23
 msgid "Temporarily closed"
@@ -81,13 +81,17 @@ msgstr ""
 msgid "Organization"
 msgstr "Szervezet"
 
-#: entities/models.py:39 entities/models.py:114
+#: entities/models.py:39 entities/models.py:117
 msgid "Community Enterprise"
 msgstr "Közösségi vállalkozás"
 
 #: entities/models.py:40
 msgid "Other"
 msgstr "Egyéb"
+
+#: entities/models.py:53
+msgid "Nickname"
+msgstr "Becenév"
 
 #: entities/models.py:54
 msgid "Phone"
@@ -97,89 +101,108 @@ msgstr "Telefon"
 msgid "Location of residency"
 msgstr "Tartózkodási hely"
 
+#: entities/models.py:56
+#, fuzzy
+#| msgid "Profile"
+msgid "Profile picture"
+msgstr "Profilkép"
+
 #: entities/models.py:57
 msgid "Introduction"
 msgstr "Bemutatkozás"
 
 #: entities/models.py:68
 msgid "User"
-msgstr ""
+msgstr "Koma"
 
-#: entities/models.py:70
+#: entities/models.py:69 templates/brahma/nav.html:18
+#: templates/entities/user_list.html:3 templates/entities/user_list.html:4
+msgid "Users"
+msgstr "Komák"
+
+#: entities/models.py:71
 msgid "email address"
 msgstr "Email cím"
 
-#: entities/models.py:95
+#: entities/models.py:98
 msgid "Community"
 msgstr "Közösség"
 
-#: entities/models.py:96 templates/brahma/nav.html:14
-#: templates/entities/community_list.html:3
+#: entities/models.py:99 templates/brahma/index.html:17
+#: templates/brahma/nav.html:14 templates/entities/community_list.html:3
 #: templates/entities/community_list.html:5
 msgid "Communities"
 msgstr "Közösségek"
 
 #: entities/models.py:101
+msgid "Web identifier"
+msgstr "Webes azonosító"
+
+#: entities/models.py:104
 msgid "Date of foundation"
 msgstr "Alapítás éve"
 
 # Közösségek szempontjából lényeges földrajzi helyek (közösségi terek, tanyák, stb.)
-#: entities/models.py:121
+#: entities/models.py:124
 msgid "Location"
 msgstr "Helyszín"
 
 # Közösségek szempontjából lényeges földrajzi helyek (közösségi terek, tanyák, stb.)
-#: entities/models.py:122
+#: entities/models.py:125
 msgid "Locations"
 msgstr "Helyszínek"
 
-#: entities/models.py:124 entities/models.py:134
+#: entities/models.py:127 entities/models.py:137
 msgid "Category"
 msgstr "Kategória"
 
 # Egyéb, közösségek szempontjából lényeges entitások (intézmények, portálok, vállalkozások, személyek, stb.)
-#: entities/models.py:131
+#: entities/models.py:134
 msgid "Other Entity"
 msgstr "Egyéb entitás"
 
 # Egyéb, közösségek szempontjából lényeges entitások (intézmények, portálok, vállalkozások, személyek, stb.)
-#: entities/models.py:132
+#: entities/models.py:135
 #, fuzzy
 #| msgid "Other Entity"
 msgid "Other Entities"
 msgstr "Egyéb entitások"
 
-#: entities/models.py:140
+#: entities/models.py:143
 #, fuzzy
 #| msgid "Organization"
 msgid "Invitation"
 msgstr "Meghívó"
 
-#: entities/models.py:141
+#: entities/models.py:144
 #, fuzzy
 #| msgid "Organization"
 msgid "Invitations"
 msgstr "Meghívók"
 
+#: templates/brahma/about.html:3 templates/brahma/nav.html:37
+msgid "About us"
+msgstr "Rólunk"
+
 #: templates/brahma/app.html:9
 msgid "You need to enable JavaScript to run this app."
-msgstr ""
+msgstr "Az applikáció használatához engedélyezd a böngésződben a JavaScript-et."
 
 #: templates/brahma/index.html:4
 msgid "Főoldal"
 msgstr ""
 
-#: templates/brahma/nav.html:48 templates/entities/user_form.html:20
+#: templates/brahma/nav.html:53 templates/entities/user_form.html:20
 msgid "Log out"
 msgstr ""
 
-#: templates/brahma/nav.html:55 templates/registration/login.html:4
+#: templates/brahma/nav.html:61 templates/registration/login.html:4
 #: templates/registration/login.html:6
 #: templates/registration/password_change_done.html:8
 msgid "Log in"
 msgstr ""
 
-#: templates/brahma/nav.html:58 templates/entities/user_form.html:7
+#: templates/brahma/nav.html:64 templates/entities/user_form.html:7
 #: templates/entities/user_form.html:26
 msgid "Register"
 msgstr "Regisztráció"
@@ -316,24 +339,28 @@ msgstr ""
 #: templates/entities/user_form.html:41
 #, python-format
 msgid "Change your password <a href=\"%(pw_change_url)s\">here</a>"
-msgstr "Jelszavad megváltoztatásához kattints <a href=\"%(pw_change_url)s\">ide</a>"
+msgstr ""
+"Jelszavad megváltoztatásához kattints <a href=\"%(pw_change_url)s\">ide</a>"
 
 #: templates/entities/user_form.html:44
-#, python-format
-msgid "Meghívó küldéséhez kattints <a href=\"%(send_inv_url)s\">ide</a>"
-msgstr ""
+#, fuzzy, python-format
+#| msgid "Change your password <a href=\"%(pw_change_url)s\">here</a>"
+msgid "Send invitation to a friend <a href=\"%(send_inv_url)s\">here</a>"
+msgstr "Meghívó küldéséhez kattints <a href=\"%(pw_change_url)s\">ide</a>"
 
-#: templates/entities/user_list.html:12
+#: templates/entities/user_list.html:13
 msgid "No users at the moment"
 msgstr ""
 
 #: templates/registration/login.html:9
 msgid "The requested page is only available to logged in users. Log in or "
 msgstr ""
+"A kért oldal csak bejelentkezett felhasználók számára látható. Jelentkezz "
+"be, vagy "
 
 #: templates/registration/login.html:9
 msgid "register"
-msgstr ""
+msgstr "regisztrálj"
 
 #: templates/registration/login.html:17
 msgid "Forgotten your password or username?"

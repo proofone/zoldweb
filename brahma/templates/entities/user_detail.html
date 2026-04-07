@@ -1,9 +1,17 @@
 {% extends 'brahma/base.html' %}
 {% load i18n %}
 {% block title %}{{ object }}{% endblock title %}
+{% block page_header %}
+{{ object }}
+<a href="#" class="btn btn-outline-primary disabled mx-3" aria-disabled="true">
+  {% trans "Message" %}
+</a>
+{% endblock page_header %}
+
 {% block content %}
-  <h1 class="h1 mb-3">{{ object }}</h1>
-  <div>{{ object.hometown }}</div>
-  <a href="#" class="btn btn-outline-primary">{% trans "Message" %}</a>
+<div class="mb-3 text-secondary">
+  {{ object.hometown }}
+</div>
+<div class="my-3">{{ object.intro }}</div>
 {% endblock %}
 

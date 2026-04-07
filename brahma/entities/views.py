@@ -3,7 +3,8 @@ from typing import Any
 from urllib.parse import urlencode
 from django.conf import settings
 from django.db import models
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
+from django.forms import BaseModelForm
+from django.http import HttpRequest, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseRedirect
 from django.core.mail import send_mail
 from django.utils.translation import gettext_lazy as _
 from django.template.loader import render_to_string
@@ -148,13 +149,23 @@ class ProfileView(LoginRequiredMixin, generic.UpdateView):
 
 
 class CommunityUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Community
     form_class = CommunityForm
     template_name = "entities/community_form.html"
 
-    def get_success_url(self) -> str:
-        comm_obj = self.get_form().instance
-        CommunityMembership.objects.create(community=comm_obj, member=self.request.user, membership_type="admin")
+    # def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+    # TODO: return forbidden if user not admin
+    #     if self.request.user not in self.object.get_admins():
+        # return super().post(request, *args, **kwargs)
         
-        return reverse('community', args=[comm_obj.slug])
+    # def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+    #     ctxt = super().get_context_data(**kwargs)
+        
+    #     return ctxt 
+    
+    def get_success_url(self) -> str:
+
+        return reverse('community', args=[self.object.slug])
+
         
 
