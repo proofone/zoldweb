@@ -1,6 +1,7 @@
+{% with obj_photo=obj.avatar_photo %}{% endwith %}
 <div class="d-flex">
     <div class="flex-shrink-0">
-        <img src="{{ obj.image.url }}" alt="Kép">
+        <img src="{{ obj_photo.url|default:'' }}" alt="Kép">
     </div>
     <div class="flex-grow-1 ms-3">
         <div>

@@ -1,9 +1,10 @@
 {% extends 'brahma/base.html' %}
 {% load i18n %}
-{% block title %}Komák{% endblock title %}
+{% block title %}{% trans "Users" %}{% endblock title %}
+{% block page_header %}{% trans "Users" %}{% endblock page_header %}
+
 {% block content %}
-  <h1 class="h1 mb-3">Komák</h1>
-  <ul class="list-group my-2">
+  <ul class="list-group py-2">
     {% for obj in object_list %}
       <li class="list-group-item rounded-3 my-2">
         {% include 'entities/entity_item.html' with obj=obj %}
