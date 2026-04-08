@@ -25,6 +25,15 @@ CONN_MAX_AGE = 120
 STATIC_URL = os.environ.get("DJANGO_STATIC_URL", "static/")
 STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ['EMAIL_HOST']
+EMAIL_PORT = os.environ.get('EMAIL_PORT', 587)
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+
+DEFAULT_FROM_EMAIL = 'noreply@komak.hu'
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
