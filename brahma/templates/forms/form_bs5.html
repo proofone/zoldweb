@@ -4,7 +4,7 @@
 {% endif %}
 
 {% for field, errors in fields %}
-  <div{% with classes=field.css_classes %} class="{{ classes }} form-floating mb-3"{% endwith %}>
+  <div{% with autofocus=forloop.first classes=field.css_classes %} class="{{ classes }} form-floating mb-3"{% endwith %}>
     {{ field }}
     {% if field.use_fieldset %}
       <fieldset>
@@ -20,6 +20,7 @@
     {% endif %}
   </div>
 {% endfor %}
+
 {% if not fields and not errors %}
   {% for field in hidden_fields %}{{ field }}{% endfor %}
 {% endif %}
