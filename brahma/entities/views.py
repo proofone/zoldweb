@@ -29,6 +29,12 @@ class RegisterView(generic.CreateView):
     success_url = "/"
 
     # TODO: def get_success_url() -> if user is_active -> profile page else: message
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        ctxt = super().get_context_data(**kwargs)
+        ctxt['reg_open'] = settings.REGISTRATION_OPEN
+        
+        return ctxt
     
     def get_initial(self) -> dict[str, Any]:
         initials = super().get_initial()
@@ -57,6 +63,9 @@ class RegisterView(generic.CreateView):
                 form.instance.is_active = False
                 form.add_error(None, _(err_msg))
 
+        elif not settings.REGISTRATION_OPEN:
+            return HttpResponseForbidden('Registration is only available with a valid invitation at the moment.')
+
         if not self.object:
             self.object = form.save()
 
@@ -70,7 +79,6 @@ class ConfirmEmailView(generic.TemplateView):
 class SendInvitationView(LoginRequiredMixin, generic.CreateView):
     model = Invitation
     fields = ["email"]
-    # success_url = reverse('profile')
 
     def form_valid(self, form):
         form.instance.sender = self.request.user
