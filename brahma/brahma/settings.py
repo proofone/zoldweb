@@ -26,7 +26,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
+    "django.contrib.gis",
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -45,8 +46,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR / 'templates',
-                django.__path__[0] + "/forms/templates",
-                ],
+                 django.__path__[0] + "/forms/templates",
+                 ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,7 +127,7 @@ REGISTRATION_OPEN = False
 INVITATION_OPEN = False
 
 
-if 'WEBSITE_HOSTNAME' in os.environ: # Running on Azure
+if 'WEBSITE_HOSTNAME' in os.environ:  # Running on Azure
     from .azure import *
     MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
     INSTALLED_APPS.insert(1, "whitenoise.runserver_nostatic")

@@ -1,8 +1,6 @@
 import uuid
-from django.conf import settings
 from django.contrib.auth.models import AbstractUser, BaseUserManager
-from django.db import models
-from django.utils.timezone import now
+from django.contrib.gis.db import models
 from datetime import date
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -52,6 +50,7 @@ class BaseEntity(models.Model):
 
     name = models.CharField(_("Nickname"), max_length=50)
     phone = models.CharField(_("Phone"), blank=True, max_length=15)  # TODO: regexvalidator
+    location_geo = models.GeometryField(_("Geographic location"), blank=True, null=True)
     hometown = models.CharField(_("Location of residency"), blank=True, max_length=255)
     avatar_photo = models.ImageField(_("Profile picture"), blank=True)
     intro = models.CharField(_("Introduction"), blank=True, max_length=512)
@@ -99,7 +98,7 @@ class Community(BaseEntity):
         verbose_name_plural = _("Communities")
 
     slug = models.SlugField(_("Web identifier"), unique=True)
-    location = models.CharField(blank=True, max_length=255)  # TODO: geodjango geometryfield?
+    location = models.CharField(blank=True, max_length=255)
     members = models.ManyToManyField('User', through='CommunityMembership')
     founded = models.DateField(_("Date of foundation"), default=date.today)
     status = models.CharField(choices=COMM_STATUS_CHOICES, default="init", max_length=64)  # TODO
@@ -128,7 +127,6 @@ class Location(BaseEntity):
         verbose_name_plural = _("Locations")
 
     category = models.CharField(_("Category"), choices=LOCATION_CAT_CHOICES, max_length=255)  # TODO
-    location = None  # TODO: geodjango geometryfield?
 
 
 class OtherEntity(BaseEntity):
