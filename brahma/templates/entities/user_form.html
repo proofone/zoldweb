@@ -36,27 +36,31 @@
     </div>
     <div class="row justify-content-center">
       <div class="col col-md-6">
-        <form method="POST" class="form-floating">
-          {% csrf_token %}
-          <input type="hidden" name="inv_id" value="{{ request.GET.iid }}">
-          {{ form }}
-          <div class="btn-group-sm d-flex justify-content-between mt-2">
-            <input type="submit" class="btn btn-outline-success flex-grow-1" value={% trans "Submit" %}>
-          {% if "profile" in request.path %}
-            <input type="reset" class="btn btn-outline-warning ms-3" value={% trans "Reset" %}>
-            <button onclick="history.back()" class="btn btn-outline-danger ms-3">{% trans "Cancel" %}</button>
-          </div>
-          <div class="my-2">
-            {% blocktrans %}Change your password <a href="{{ pw_change_url }}">here</a>{% endblocktrans %}
-          </div>
-          <div class="my-2">
-            {% blocktrans %}Send invitation to a friend <a href="{{ send_inv_url }}">here</a>{% endblocktrans %}
-          </div>
-          {% else %}
-          </div>
-          {% endif %}
-        </form>
-        
+        {% if reg_open  %}
+          <form method="POST" class="form-floating">
+            {% csrf_token %}
+            <input type="hidden" name="inv_id" value="{{ request.GET.iid }}">
+            {{ form }}
+            <div class="btn-group-sm d-flex justify-content-between mt-2">
+              <input type="submit" class="btn btn-outline-success flex-grow-1" value={% trans "Submit" %}>
+              {% if "profile" in request.path %}
+                <input type="reset" class="btn btn-outline-warning ms-3" value={% trans "Reset" %}>
+                <button onclick="history.back()" class="btn btn-outline-danger ms-3">{% trans "Cancel" %}</button>
+              </div>
+              <div class="my-2">
+                {% blocktrans %}Change your password <a href="{{ pw_change_url }}">here</a>{% endblocktrans %}
+              </div>
+              <div class="my-2">
+                {% blocktrans %}Send invitation to a friend <a href="{{ send_inv_url }}">here</a>{% endblocktrans %}
+              </div>
+              {% else %}
+            </div>
+            {% endif %}
+          </form>
+        {% else %}
+        <div class="alert alert-secondary my-3" role="alert">{% trans "Registration is only available with a valid invitation at the moment." %}</div>
+
+        {% endif %}        
       </div>
 
     </div>
