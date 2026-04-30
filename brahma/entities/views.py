@@ -32,13 +32,15 @@ class RegisterView(generic.CreateView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         ctxt = super().get_context_data(**kwargs)
-        ctxt['reg_open'] = settings.REGISTRATION_OPEN
+        ctxt['reg_open'] = settings.REGISTRATION_OPEN or self.request.GET.get('iid', None)
         
         return ctxt
     
     def get_initial(self) -> dict[str, Any]:
         initials = super().get_initial()
-        initials['email'] = self.request.GET.get('ie', "")
+        inv_email = self.request.GET.get('ie', "")
+        if inv_email:
+            initials['email'] = inv_email
 
         return initials
 
@@ -64,7 +66,7 @@ class RegisterView(generic.CreateView):
                 form.add_error(None, _(err_msg))
 
         elif not settings.REGISTRATION_OPEN:
-            return HttpResponseForbidden('Registration is only available with a valid invitation at the moment.')
+            return HttpResponseForbidden(_('Registration is only available with a valid invitation at the moment.'))
 
         if not self.object:
             self.object = form.save()
