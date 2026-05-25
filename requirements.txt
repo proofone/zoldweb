@@ -1,7 +1,7 @@
 asgiref==3.11.1
 boto3==1.43.0
 botocore==1.43.0
-Django==6.0.4
+Django==6.0.5
 django-storages==1.14.6
 jmespath==1.1.0
 pillow>=12.1.1

@@ -36,6 +36,9 @@ LOCATION_CAT_CHOICES = [
 
 OTHER_ENTITY_CAT_CHOICES = [
     ("org", _("Organization")),
+    ("gov_org", _("Governmental Organization")),
+    ("sci_org", _("Scientific Organization")),
+    ("news_org", _("News Organization")),
     ("comm_ent", _("Community Enterprise")),
     ("other", _("Other")),
 ]
@@ -137,7 +140,7 @@ class OtherEntity(BaseEntity):
         verbose_name = _("Other Entity")
         verbose_name_plural = _("Other Entities")
 
-    category = models.CharField(_("Category"), choices=OTHER_ENTITY_CAT_CHOICES, max_length=64)  # TODO
+    category = models.CharField(_("Category"), choices=OTHER_ENTITY_CAT_CHOICES, max_length=64)
     admins = models.ManyToManyField('User')
 
 

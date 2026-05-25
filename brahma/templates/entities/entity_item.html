@@ -1,7 +1,6 @@
-{% with obj_photo=obj.avatar_photo %}{% endwith %}
-<div class="d-flex">
-    <div class="flex-shrink-0">
-        <img src="{{ obj_photo.url|default:'' }}" alt="Kép">
+<div class="d-flex vh-5">
+    <div class="flex-shrink-0" style="width: 80px; height: 100%">
+        <img src="{{ obj.avatar_photo.url|default:'' }}" alt="Kép" class="w-100 h-100 rounded object-fit-scale">
     </div>
     <div class="flex-grow-1 ms-3">
         <div>
